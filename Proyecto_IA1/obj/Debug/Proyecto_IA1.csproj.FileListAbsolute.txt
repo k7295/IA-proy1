@@ -1,0 +1,6 @@
+c:\users\christian\documents\visual studio 2015\Projects\Proyecto_IA1\Proyecto_IA1\bin\Debug\Proyecto_IA1.exe.config
+c:\users\christian\documents\visual studio 2015\Projects\Proyecto_IA1\Proyecto_IA1\bin\Debug\Proyecto_IA1.exe
+c:\users\christian\documents\visual studio 2015\Projects\Proyecto_IA1\Proyecto_IA1\bin\Debug\Proyecto_IA1.pdb
+c:\users\christian\documents\visual studio 2015\Projects\Proyecto_IA1\Proyecto_IA1\obj\Debug\Proyecto_IA1.csprojResolveAssemblyReference.cache
+c:\users\christian\documents\visual studio 2015\Projects\Proyecto_IA1\Proyecto_IA1\obj\Debug\Proyecto_IA1.exe
+c:\users\christian\documents\visual studio 2015\Projects\Proyecto_IA1\Proyecto_IA1\obj\Debug\Proyecto_IA1.pdb
