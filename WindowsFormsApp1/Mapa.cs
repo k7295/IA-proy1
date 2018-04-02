@@ -39,7 +39,7 @@ namespace Proyecto_IA1.Mapa
             return res;
         }
 
-        private void dijkstra()
+        public void dijkstra()
         {
             int m = this.matriz.Length;
             int n = this.matriz[0].Length;
@@ -248,7 +248,7 @@ namespace Proyecto_IA1.Mapa
             return true;
         }
 
-        private bool existeSolucion()
+        public bool existeSolucion()
         {
             int[] indice = new int[2];
             indice[0] = inicioX;
