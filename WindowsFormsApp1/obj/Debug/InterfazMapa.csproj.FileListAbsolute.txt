@@ -1,0 +1,10 @@
+E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\InterfazMapa.csprojResolveAssemblyReference.cache
+E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\InterfazMapa.csproj.GenerateResource.cache
+E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\InterfazMapa.csproj.CoreCompileInputs.cache
+E:\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+E:\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+E:\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources

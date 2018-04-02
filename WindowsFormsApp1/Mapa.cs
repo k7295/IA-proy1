@@ -182,19 +182,19 @@ namespace Proyecto_IA1.Mapa
             return matrizNueva;
         }
 
-        private void colocarInicio(int x, int y)
+        public void colocarInicio(int x, int y)
         {
             this.inicioX = x;
             this.inicioY = y;
         }
 
-        private void colocarFinal(int x, int y)
+        public void colocarFinal(int x, int y)
         {
             this.finalX = x;
             this.finalY = y;
         }
 
-        private void colocarObstaculos(int cantObstaculos)
+        public void colocarObstaculos(int cantObstaculos)
         {
             int m = this.matriz.Length;
             int n = this.matriz[0].Length;
@@ -222,7 +222,7 @@ namespace Proyecto_IA1.Mapa
 
         }
 
-        private void imprimirArreglo()
+        public void imprimirArreglo()
         {
             int m = this.matriz.Length;
             int n = this.matriz[0].Length;
@@ -290,53 +290,64 @@ namespace Proyecto_IA1.Mapa
             return res;
         }
 
-        private int[] next(int[] actual)
+		public int getElementoPos(int m,int n)
+		{
+			return matriz[m][n];
+		}
+
+		public void setElementoPos(int m, int n,int p)
+		{
+			matriz[m][n]=p;
+		}
+
+		private int[] next(int[] actual)
         {
             return indiceLista_Matriz(solucion[indiceMatriz_Lista(actual[0], actual[1])]);
         }
 
-        static void Main2()
+		public void Main2()
         {
             Mapa m = new Mapa(5, 6, 100);
             m.colocarInicio(0, 0);
             m.colocarFinal(4, 4);
             m.colocarObstaculos(10);
-            System.Console.WriteLine("-----------------------------------------------------------------");
-            System.Console.WriteLine("El mapa actual");
-            System.Console.WriteLine("-----------------------------------------------------------------");
-            m.imprimirArreglo();
-            m.dijkstra();
+			m.imprimirArreglo();
+			/* System.Console.WriteLine("-----------------------------------------------------------------");
+			 System.Console.WriteLine("El mapa actual");
+			 System.Console.WriteLine("-----------------------------------------------------------------");
 
-            
-            if (m.existeSolucion())
-            {
-                ArrayList lista = m.demeSolucion();
-                System.Console.WriteLine("El tamaño de la solucion es: " + lista.Count);
-
-                System.Console.WriteLine();
-                System.Console.WriteLine("-----------------------------------------------------------------");
-                System.Console.WriteLine("La solucion es:");
-                System.Console.WriteLine("-----------------------------------------------------------------");
-                System.Console.WriteLine("X Y");
-
-                foreach (int[] n in lista)
-                {
-                    System.Console.WriteLine(n[0] + " " + n[1]);
-
-                }
-            }else
-            {
-                System.Console.WriteLine("No existe solucion.");
-            }
-            
-            
-
-            
-            
-            
+			 m.dijkstra();
 
 
-            System.Console.Read();
+			 if (m.existeSolucion())
+			 {
+				 ArrayList lista = m.demeSolucion();
+				 System.Console.WriteLine("El tamaño de la solucion es: " + lista.Count);
+
+				 System.Console.WriteLine();
+				 System.Console.WriteLine("-----------------------------------------------------------------");
+				 System.Console.WriteLine("La solucion es:");
+				 System.Console.WriteLine("-----------------------------------------------------------------");
+				 System.Console.WriteLine("X Y");
+
+				 foreach (int[] n in lista)
+				 {
+					 System.Console.WriteLine(n[0] + " " + n[1]);
+
+				 }
+			 }else
+			 {
+				 System.Console.WriteLine("No existe solucion.");
+			 }*/
+
+
+
+
+
+
+
+
+			System.Console.Read();
         }
 
 
