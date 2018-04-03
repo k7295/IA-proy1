@@ -12,6 +12,8 @@ namespace Proyecto_IA1.Mapa
         public int[][] matriz { get; set; }
         public int inicioX { get; set; }
         public int inicioY { get; set; }
+        public int m { get; set; }
+        public int n { get; set; }
         public int finalX { get; set; }
         public int finalY { get; set; }
         public int tamañoCuadro { get; set; }
@@ -22,6 +24,9 @@ namespace Proyecto_IA1.Mapa
             this.matriz = generarMatrizVacia(m, n, 0);
             this.tamañoCuadro = a;
             this.solucion = generarListaInt(m * n, -1);
+            this.m = m;
+            this.n = n;
+
         }
 
         private int indiceMatriz_Lista(int x, int y)
@@ -220,6 +225,114 @@ namespace Proyecto_IA1.Mapa
                 }
             }
 
+        }
+
+        public void moverNorte()
+        {
+            if (inicioY > 0)
+            {
+                if (matriz[inicioX][inicioY - 1] != 1)
+                {
+                    matriz[inicioX][inicioY] = 0;
+                    inicioY -= 1;
+                    matriz[inicioX][inicioY] = 2;
+                }
+            }
+        }
+
+        public void moverSur()
+        {
+            if (inicioY < m)
+            {
+                if (matriz[inicioX][inicioY + 1] != 1)
+                {
+                    matriz[inicioX][inicioY] = 0;
+                    inicioY += 1;
+                    matriz[inicioX][inicioY] = 2;
+                }
+            }
+        }
+
+        public void moverOeste()
+        {
+            if (inicioX > 0)
+            {
+                if (matriz[inicioX-1][inicioY] != 1)
+                {
+                    matriz[inicioX][inicioY] = 0;
+                    inicioX -= 1;
+                    matriz[inicioX][inicioY] = 2;
+                }
+            }
+        }
+
+        public void moverEste()
+        {
+            if (inicioX < n)
+            {
+                if (matriz[inicioX+1][inicioY] != 1)
+                {
+                    matriz[inicioX][inicioY] = 0;
+                    inicioX += 1;
+                    matriz[inicioX][inicioY] = 2;
+                }
+            }
+        }
+
+        public void moverNorEste()
+        {
+            if (inicioX < n && inicioY > 0)
+            {
+                if (matriz[inicioX + 1][inicioY-1] != 1)
+                {
+                    matriz[inicioX][inicioY] = 0;
+                    inicioX += 1;
+                    inicioY -= 1;
+                    matriz[inicioX][inicioY] = 2;
+                }
+            }
+        }
+
+        public void moverNorOeste()
+        {
+            if (inicioX > 0 && inicioY > 0)
+            {
+                if (matriz[inicioX - 1][inicioY - 1] != 1)
+                {
+                    matriz[inicioX][inicioY] = 0;
+                    inicioX -= 1;
+                    inicioY -= 1;
+                    matriz[inicioX][inicioY] = 2;
+                }
+            }
+        }
+
+        public void moverSurOeste()
+        {
+            if (inicioX > 0 && inicioY < n)
+            {
+                if (matriz[inicioX - 1][inicioY + 1] != 1)
+                {
+                    matriz[inicioX][inicioY] = 0;
+                    inicioX -= 1;
+                    inicioY += 1;
+                    matriz[inicioX][inicioY] = 2;
+                }
+            }
+        }
+
+        public void moverSurEeste()
+        {
+            if (inicioX < m && inicioY < n)
+            {
+                if (matriz[inicioX + 1][inicioY + 1] != 1)
+                {
+                    matriz[inicioX][inicioY] = 0;
+                    inicioX += 1;
+                    inicioY += 1;
+                    matriz[inicioX][inicioY] = 2;
+                }
+            }
         }
 
         public void imprimirArreglo()
