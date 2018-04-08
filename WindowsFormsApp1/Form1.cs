@@ -16,11 +16,16 @@ namespace WindowsFormsApp1
 	{
 
 		static Mapa matriz;
+        int m = 20;
+        int n = 10;
+        System.Windows.Forms.PaintEventArgs e;
 
-		public Form1()
+
+        public Form1()
 		{
 			InitializeComponent();
-		}
+            matriz = new Mapa(m, n, 100);
+        }
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
@@ -33,12 +38,10 @@ namespace WindowsFormsApp1
 		private void form1_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
 		{
 			
-			e.Graphics.FillRectangle(Brushes.White,new Rectangle(0, 0, 900, 900));
 			
-			int m = 20;
-			int n = 10;
+			
 			matriz = new Mapa(m, n, 100);
-			
+            this.e = e;
 			matriz.setElementoPos(0, 0, 2);
             matriz.setElementoPos(19, 9, 4);
 			matriz.colocarInicio(0, 0);
@@ -47,8 +50,13 @@ namespace WindowsFormsApp1
 			matriz.colocarObstaculos(20);
 			matriz.imprimirArreglo();
 
-            matriz.dijkstra();
 
+            matriz.moverEste();
+            mostrarMapa();
+            matriz.moverSur();
+            mostrarMapa();
+            //matriz.dijkstra();
+            /*
             if (matriz.existeSolucion())
             {
                 ArrayList lista = matriz.demeSolucion();
@@ -73,18 +81,24 @@ namespace WindowsFormsApp1
             else
             {
                 System.Console.WriteLine("No existe solucion.");
-            }
-            
+            }*/
+
             //matriz.setElementoPos(0, 0, 1);
+
+        }
+
+        public void mostrarMapa()
+        {
+            e.Graphics.FillRectangle(Brushes.White, new Rectangle(0, 0, 900, 900));
             for (int i = 0; i < m; i++)
-			{
-				for (int b = 0; b < n; b++)
-				{
-					
-					if (matriz.getElementoPos(i, b) == 1)
-					{
-						e.Graphics.FillRectangle(Brushes.Black, new Rectangle(i*10, b*10, 10, 10));
-					}
+            {
+                for (int b = 0; b < n; b++)
+                {
+
+                    if (matriz.getElementoPos(i, b) == 1)
+                    {
+                        e.Graphics.FillRectangle(Brushes.Black, new Rectangle(i * 10, b * 10, 10, 10));
+                    }
                     if (matriz.getElementoPos(i, b) == 2)
                     {
                         e.Graphics.FillRectangle(Brushes.LightGreen, new Rectangle(i * 10, b * 10, 10, 10));
@@ -99,12 +113,13 @@ namespace WindowsFormsApp1
                     }
                 }
 
-			}
-		}
+            }
+        }
 
 		private void timer1_Tick(object sender, EventArgs e)
 		{
 			this.Refresh();
+            mostrarMapa();
 		}
 	}
 }
