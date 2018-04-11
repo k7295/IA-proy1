@@ -1,0 +1,25 @@
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\bin\Debug\TextToSpeech.exe
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\bin\Debug\TextToSpeech.pdb
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\obj\x86\Debug\MainWindow.baml
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\obj\x86\Debug\MainWindow.g.cs
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\obj\x86\Debug\App.g.cs
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech_MarkupCompile.cache
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.g.resources
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.Properties.Resources.resources
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.exe
+c:\users\stalin\documents\visual studio 2010\Projects\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.pdb
+C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.exe
+C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.pdb
+C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\bin\Debug\TextToSpeech.exe
+C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\bin\Debug\TextToSpeech.pdb
+C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.csprojResolveAssemblyReference.cache
+C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\MainWindow.baml
+C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\App.g.cs
+C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech_MarkupCompile.cache
+C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.g.resources
+C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.Properties.Resources.resources
+C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.csproj.GenerateResource.Cache
