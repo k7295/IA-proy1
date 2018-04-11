@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<grammar version="1.0" xml:lang="es-Es" root="Main"
+   xmlns= "http://www.w3.org/2001/06/grammar"
+   xmlns:sapi= "http://schemas.microsoft.com/Speech/2002/06/SRGSExtensions">
+
+ <rule id="Main">
+    <item>
+       <ruleref uri="#Directions"/>
+    </item>
+  </rule>
+
+  <rule id="Directions" scope="public">
+    <one-of>
+      <item> arriba </item>
+      <item> abajo </item>
+      <item> izquieda </item>
+      <item> derecha </item>
+      <item> diagonalinferiorizquieda </item>
+      <item> diagonalinferiorderecha </item>
+       <item> diagonalsuperiorizquieda </item>
+      <item> diagonalsuperiorbelow </item>
+    </one-of>
+  </rule>
+</grammar>
