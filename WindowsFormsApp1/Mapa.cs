@@ -432,6 +432,16 @@ namespace Proyecto_IA1.Mapa
             }
         }
 
+        public void enableDiagonal()
+        {
+            modoDiagonal = true;
+        }
+
+        public void disableDiagonal()
+        {
+            modoDiagonal = false;
+        }
+
         public void crearRuta()
         {
             a_estrella(modoDiagonal);

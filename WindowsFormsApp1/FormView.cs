@@ -33,10 +33,6 @@ namespace WindowsFormsApp1
             sSynth.SelectVoiceByHints(VoiceGender.Female);
             matriz = new Mapa(m, n, 100);
             agent = new Thread(IniAgente);
-
-            matriz = new Mapa(m, n, 100);
-
-            
             
             matriz.setElementoPos(0, 0, 2);
             matriz.colocarInicio(0, 0);
@@ -66,7 +62,15 @@ namespace WindowsFormsApp1
 
 
             Choices commands = new Choices();
-            commands.Add(new string[] { "n","north","up", "s","south","down","w","west","left","east","e","right","hello","show route" });
+            commands.Add(new string[] { "n","north","up",
+                                        "s","south","down",
+                                        "w","west","left",
+                                        "e","east","right",
+                                        "hello",
+                                        "show route" ,
+                                        "enable diagonal",
+                                        "disable diagonal",
+                                        "new"});
             GrammarBuilder gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
 
@@ -107,6 +111,7 @@ namespace WindowsFormsApp1
                 case "n":
                     if (matriz.moverNorte())
                     {
+
                         y -= size;
                     }
                     System.Console.WriteLine("up");
@@ -188,7 +193,7 @@ namespace WindowsFormsApp1
                     }
                     System.Console.WriteLine("right");
                     break;
-                case "hello":
+                case "hello1":
                     
                     Invalidate();
                     System.Console.WriteLine("hello");
@@ -198,8 +203,33 @@ namespace WindowsFormsApp1
                     matriz.crearRuta();
                     System.Console.WriteLine("show route");
                     break;
+                case "enable diagonal":
+                    matriz.enableDiagonal();
+                    System.Console.WriteLine("enable Diagonal");
+                    break;
+                case "disable diagonal":
+                    matriz.disableDiagonal();
+                    System.Console.WriteLine("disable diagonal");
+                    break;
+                case "hello":
+                    matriz = new Mapa(m, n, 100);
+                    matriz.setElementoPos(0, 0, 2);
+                    matriz.colocarInicio(0, 0);
+             
+                    Random rnd = new Random();
+                    int randX = rnd.Next(m - 10, m);
+                    int randY = rnd.Next(n - 10, n);
+                    matriz.setElementoPos(randX, randY, 4);
+                    matriz.colocarFinal(randX, randY);
+                    matriz.colocarObstaculos((m * n) / 7);
+                    break;
             }
-            System.Console.WriteLine(er.Result.Text);
+            pBuild.ClearContent();
+            pBuild.AppendText(er.Result.Text);
+            sSynth.Speak(pBuild);
+
+            pBuild.ClearContent();
+            pBuild.AppendText("What to do now?");
             //matriz.imprimirArreglo();
         }
 
