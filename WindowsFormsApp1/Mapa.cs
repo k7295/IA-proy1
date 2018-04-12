@@ -251,7 +251,7 @@ namespace Proyecto_IA1.Mapa
 
         public bool moverEste()
         {
-            if (inicioX < n)
+            if (inicioX+1 < n)
             {
                 if (matriz[inicioY][inicioX + 1] != 1)
                 {
@@ -295,7 +295,7 @@ namespace Proyecto_IA1.Mapa
 
         public bool moverSur()
         {
-            if (inicioY < m)
+            if (inicioY + 1 < m)
             {
                 if (matriz[inicioY+1][inicioX] != 1)
                 {
@@ -317,7 +317,7 @@ namespace Proyecto_IA1.Mapa
 
         public bool moverSurOeste()
         {
-            if (inicioX > 0 && inicioY < m)
+            if (inicioX > 0 && inicioY + 1 < m)
             {
                 if (matriz[inicioY + 1][inicioX-1] != 1)
                 {
@@ -363,7 +363,7 @@ namespace Proyecto_IA1.Mapa
 
         public bool moverNorEste()
         {
-            if (inicioX < n && inicioY > 0)
+            if (inicioX + 1 < n && inicioY > 0)
             {
                 if (matriz[inicioY - 1][inicioX + 1] != 1)
                 {
@@ -386,7 +386,7 @@ namespace Proyecto_IA1.Mapa
 
         public bool moverSurEste()
         {
-            if (inicioX < n && inicioY < m)
+            if (inicioX+1 < n && inicioY+1 < m)
             {
                 if (matriz[inicioY + 1][inicioX + 1] != 1)
                 {
