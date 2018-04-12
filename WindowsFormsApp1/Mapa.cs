@@ -227,7 +227,7 @@ namespace Proyecto_IA1.Mapa
 
         }
 
-        public void moverNorte()
+        public void moverOeste()
         {
             if (inicioY > 0)
             {
@@ -240,7 +240,7 @@ namespace Proyecto_IA1.Mapa
             }
         }
 
-        public void moverSur()
+        public void moverEste()
         {
             if (inicioY < m)
             {
@@ -253,7 +253,7 @@ namespace Proyecto_IA1.Mapa
             }
         }
 
-        public void moverOeste()
+        public void moverNorte()
         {
             if (inicioX > 0)
             {
@@ -266,7 +266,7 @@ namespace Proyecto_IA1.Mapa
             }
         }
 
-        public void moverEste()
+        public void moverSur()
         {
             if (inicioX < n)
             {
@@ -279,7 +279,7 @@ namespace Proyecto_IA1.Mapa
             }
         }
 
-        public void moverNorEste()
+        public void moverSurOeste()
         {
             if (inicioX < n && inicioY > 0)
             {
@@ -307,7 +307,7 @@ namespace Proyecto_IA1.Mapa
             }
         }
 
-        public void moverSurOeste()
+        public void moverNorEste()
         {
             if (inicioX > 0 && inicioY < n)
             {
@@ -321,7 +321,7 @@ namespace Proyecto_IA1.Mapa
             }
         }
 
-        public void moverSurEeste()
+        public void moverSurEste()
         {
             if (inicioX < m && inicioY < n)
             {

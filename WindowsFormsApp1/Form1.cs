@@ -1,45 +1,136 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Proyecto_IA1.Mapa;
+using System.Speech.Recognition;
+using System.Speech.Synthesis;
+using System.Globalization;
+using System.Threading;
+using Google.Apis.Speech;
 
 namespace WindowsFormsApp1
 {
-	public partial class Form1 : Form
+    public partial class Form1 : Form
 	{
 
 		static Mapa matriz;
         int m = 20;
         int n = 10;
         System.Windows.Forms.PaintEventArgs e;
-
+        SpeechRecognitionEngine recEngine = new SpeechRecognitionEngine();
+        SpeechSynthesizer  sSynth = new SpeechSynthesizer();
+        PromptBuilder pBuild = new PromptBuilder();
+        Thread y;
+        Thread mapa;
 
         public Form1()
 		{
 			InitializeComponent();
+            
             matriz = new Mapa(m, n, 100);
+            y = new Thread(IniAgente);
+
+            mapa = new Thread(mostrarMapaAux);
+            
         }
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			this.DoubleBuffered = true;
+            this.Paint += new PaintEventHandler(form1_Paint);
 
-			this.Paint += new PaintEventHandler(form1_Paint);
+            
 
-		}
+
+        }
+
+        public void IniAgente()
+        {
+            Choices commands = new Choices();
+            commands.Add(new string[] { "up", "down","left","right","hello" });
+            GrammarBuilder gBuilder = new GrammarBuilder();
+            gBuilder.Append(commands);
+
+            Grammar grammar = new Grammar(gBuilder);
+
+            recEngine.LoadGrammarAsync(grammar);
+            recEngine.SetInputToDefaultAudioDevice();
+            recEngine.SpeechRecognized += recEngine_SpeechRecognized;
+            pBuild.ClearContent();
+            pBuild.AppendText("Where to move?");
+
+            Agente();
+        }
+
+        public void Agente()
+        {
+            
+            sSynth.Speak(pBuild);
+            DateTime localDate = DateTime.Now;
+            recEngine.RecognizeAsync();
+            while (true)
+            {
+                DateTime localDatenew = DateTime.Now;
+                if ((localDatenew - localDate).TotalSeconds > 5)
+                {
+                    break;
+                }
+            }
+            recEngine.RecognizeAsyncStop();
+            recEngine.SpeechRecognized += recEngine_SpeechRecognized;
+            Agente();
+        }
+
+        public void recEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            switch (e.Result.Text)
+            {
+                case "up":
+                    matriz.moverNorte();
+                    System.Console.WriteLine("up");
+                    break;
+                case "down":
+                    matriz.moverSur();
+                    System.Console.WriteLine("down");
+                    break;
+                case "left":
+                    matriz.moverOeste();
+                    System.Console.WriteLine("left");
+                    break;
+                case "right":
+                    matriz.moverEste();
+                    System.Console.WriteLine("right");
+                    break;
+                case "hello":
+                    matriz.moverEste();
+                    System.Console.WriteLine("hello");
+                    break;
+            }
+            matriz.imprimirArreglo();
+        }
+
+        void mostrarMapaAux()
+        {
+            mostrarMapa();
+            DateTime localDate = DateTime.Now; 
+            while (true)
+            {
+                DateTime localDatenew = DateTime.Now;
+                if ((localDatenew - localDate).TotalSeconds > 10)
+                {
+                    break;
+                }
+            }
+            
+            mostrarMapaAux();
+        }
 
 		private void form1_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
 		{
-			
-			
-			
+
+            
+		
+
 			matriz = new Mapa(m, n, 100);
             this.e = e;
 			matriz.setElementoPos(0, 0, 2);
@@ -48,13 +139,18 @@ namespace WindowsFormsApp1
 			matriz.colocarFinal(19, 9);
 			
 			matriz.colocarObstaculos(20);
-			matriz.imprimirArreglo();
+			
 
+            //mostrarMapa();
 
             matriz.moverEste();
+            
+            matriz.moverSur(); 
+            matriz.imprimirArreglo();
             mostrarMapa();
-            matriz.moverSur();
-            mostrarMapa();
+            y.Start();
+            //mapa.Start();
+
             //matriz.dijkstra();
             /*
             if (matriz.existeSolucion())
@@ -89,7 +185,7 @@ namespace WindowsFormsApp1
 
         public void mostrarMapa()
         {
-            e.Graphics.FillRectangle(Brushes.White, new Rectangle(0, 0, 900, 900));
+            this.e.Graphics.FillRectangle(Brushes.White, new Rectangle(0, 0, 900, 900));
             for (int i = 0; i < m; i++)
             {
                 for (int b = 0; b < n; b++)
