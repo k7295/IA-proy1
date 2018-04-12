@@ -7,7 +7,6 @@ E:\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
 E:\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
 E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
-E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
 E:\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\Google.Apis.Auth.dll
 E:\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\Google.Apis.Auth.PlatformServices.dll
 E:\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\Google.Apis.Core.dll
@@ -26,3 +25,32 @@ E:\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\Google.Apis.Core.xml
 E:\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\Google.Apis.Speech.v1.xml
 E:\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\Newtonsoft.Json.xml
 E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\InterfazMapa.csproj.CopyComplete
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\Google.Apis.Auth.dll
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\Google.Apis.Core.dll
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\Google.Apis.dll
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\Google.Apis.PlatformServices.dll
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\Google.Apis.Speech.v1.dll
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\Newtonsoft.Json.dll
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\System.Net.Http.dll
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\System.Security.Cryptography.Algorithms.dll
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\System.Security.Cryptography.Encoding.dll
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\System.Security.Cryptography.Primitives.dll
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\Google.Apis.xml
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\Google.Apis.Auth.xml
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\Google.Apis.Core.xml
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\Google.Apis.Speech.v1.xml
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\bin\Debug\Newtonsoft.Json.xml
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\obj\Debug\InterfazMapa.csprojResolveAssemblyReference.cache
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\obj\Debug\InterfazMapa.csproj.GenerateResource.cache
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\obj\Debug\InterfazMapa.csproj.CoreCompileInputs.cache
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\obj\Debug\InterfazMapa.csproj.CopyComplete
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+E:\Universidad\Semestre 8\Inteligencia artificial\New folder\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormView.resources
+E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormView.resources

@@ -227,111 +227,183 @@ namespace Proyecto_IA1.Mapa
 
         }
 
-        public void moverOeste()
-        {
-            if (inicioY > 0)
-            {
-                if (matriz[inicioX][inicioY - 1] != 1)
-                {
-                    matriz[inicioX][inicioY] = 0;
-                    inicioY -= 1;
-                    matriz[inicioX][inicioY] = 2;
-                }
-            }
-        }
-
-        public void moverEste()
-        {
-            if (inicioY < m)
-            {
-                if (matriz[inicioX][inicioY + 1] != 1)
-                {
-                    matriz[inicioX][inicioY] = 0;
-                    inicioY += 1;
-                    matriz[inicioX][inicioY] = 2;
-                }
-            }
-        }
-
-        public void moverNorte()
+        public bool moverOeste()
         {
             if (inicioX > 0)
             {
-                if (matriz[inicioX-1][inicioY] != 1)
+                if (matriz[inicioY][inicioX - 1] != 1)
                 {
-                    matriz[inicioX][inicioY] = 0;
+                    matriz[inicioY][inicioX] = 0;
                     inicioX -= 1;
-                    matriz[inicioX][inicioY] = 2;
+                    matriz[inicioY][inicioX] = 2;
+                    return true;
                 }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
 
-        public void moverSur()
+        public bool moverEste()
         {
             if (inicioX < n)
             {
-                if (matriz[inicioX+1][inicioY] != 1)
+                if (matriz[inicioY][inicioX + 1] != 1)
                 {
-                    matriz[inicioX][inicioY] = 0;
+                    matriz[inicioY][inicioX] = 0;
                     inicioX += 1;
-                    matriz[inicioX][inicioY] = 2;
+                    matriz[inicioY][inicioX] = 2;
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
-        }
-
-        public void moverSurOeste()
-        {
-            if (inicioX < n && inicioY > 0)
+            else
             {
-                if (matriz[inicioX + 1][inicioY-1] != 1)
-                {
-                    matriz[inicioX][inicioY] = 0;
-                    inicioX += 1;
-                    inicioY -= 1;
-                    matriz[inicioX][inicioY] = 2;
-                }
+                return false;
             }
         }
 
-        public void moverNorOeste()
+        public bool moverNorte()
+        {
+            if (inicioY > 0)
+            {
+                if (matriz[inicioY-1][inicioX] != 1)
+                {
+                    matriz[inicioY][inicioX] = 0;
+                    inicioY -= 1;
+                    matriz[inicioY][inicioX] = 2;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool moverSur()
+        {
+            if (inicioY < m)
+            {
+                if (matriz[inicioY+1][inicioX] != 1)
+                {
+                    matriz[inicioY][inicioX] = 0;
+                    inicioY += 1;
+                    matriz[inicioY][inicioX] = 2;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool moverSurOeste()
+        {
+            if (inicioX > 0 && inicioY < m)
+            {
+                if (matriz[inicioY + 1][inicioX-1] != 1)
+                {
+                    matriz[inicioY][inicioX] = 0;
+                    inicioY += 1;
+                    inicioX -= 1;
+                    matriz[inicioY][inicioX] = 2;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool moverNorOeste()
         {
             if (inicioX > 0 && inicioY > 0)
             {
-                if (matriz[inicioX - 1][inicioY - 1] != 1)
+                if (matriz[inicioY - 1][inicioX - 1] != 1)
                 {
-                    matriz[inicioX][inicioY] = 0;
+                    matriz[inicioY][inicioX] = 0;
                     inicioX -= 1;
                     inicioY -= 1;
-                    matriz[inicioX][inicioY] = 2;
+                    matriz[inicioY][inicioX] = 2;
+                    return true;
                 }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
 
-        public void moverNorEste()
+        public bool moverNorEste()
         {
-            if (inicioX > 0 && inicioY < n)
+            if (inicioX < n && inicioY > 0)
             {
-                if (matriz[inicioX - 1][inicioY + 1] != 1)
+                if (matriz[inicioY - 1][inicioX + 1] != 1)
                 {
-                    matriz[inicioX][inicioY] = 0;
-                    inicioX -= 1;
-                    inicioY += 1;
-                    matriz[inicioX][inicioY] = 2;
+                    matriz[inicioY][inicioX] = 0;
+                    inicioY -= 1;
+                    inicioX += 1;
+                    matriz[inicioY][inicioX] = 2;
+                    return true;
                 }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
 
-        public void moverSurEste()
+        public bool moverSurEste()
         {
-            if (inicioX < m && inicioY < n)
+            if (inicioX < n && inicioY < m)
             {
-                if (matriz[inicioX + 1][inicioY + 1] != 1)
+                if (matriz[inicioY + 1][inicioX + 1] != 1)
                 {
-                    matriz[inicioX][inicioY] = 0;
+                    matriz[inicioY][inicioX] = 0;
                     inicioX += 1;
                     inicioY += 1;
-                    matriz[inicioX][inicioY] = 2;
+                    matriz[inicioY][inicioX] = 2;
+                    return true;
                 }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
 
