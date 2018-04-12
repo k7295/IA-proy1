@@ -8,3 +8,12 @@ E:\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
 E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 E:\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\Christian\Documents\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\Christian\Documents\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\Christian\Documents\GitHub\IA-proy1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\Christian\Documents\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\InterfazMapa.csprojResolveAssemblyReference.cache
+C:\Users\Christian\Documents\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\Christian\Documents\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\Christian\Documents\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\InterfazMapa.csproj.GenerateResource.Cache
+C:\Users\Christian\Documents\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\Christian\Documents\GitHub\IA-proy1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb

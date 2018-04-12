@@ -11,3 +11,9 @@ E:\GitHub\IA-proy1\Proyecto_IA1\obj\Debug\Proyecto_IA1.csprojResolveAssemblyRefe
 E:\GitHub\IA-proy1\Proyecto_IA1\obj\Debug\Proyecto_IA1.csproj.CoreCompileInputs.cache
 E:\GitHub\IA-proy1\Proyecto_IA1\obj\Debug\Proyecto_IA1.exe
 E:\GitHub\IA-proy1\Proyecto_IA1\obj\Debug\Proyecto_IA1.pdb
+C:\Users\Christian\Documents\GitHub\IA-proy1\Proyecto_IA1\bin\Debug\Proyecto_IA1.exe.config
+C:\Users\Christian\Documents\GitHub\IA-proy1\Proyecto_IA1\obj\Debug\Proyecto_IA1.exe
+C:\Users\Christian\Documents\GitHub\IA-proy1\Proyecto_IA1\obj\Debug\Proyecto_IA1.pdb
+C:\Users\Christian\Documents\GitHub\IA-proy1\Proyecto_IA1\obj\Debug\Proyecto_IA1.csprojResolveAssemblyReference.cache
+C:\Users\Christian\Documents\GitHub\IA-proy1\Proyecto_IA1\bin\Debug\Proyecto_IA1.exe
+C:\Users\Christian\Documents\GitHub\IA-proy1\Proyecto_IA1\bin\Debug\Proyecto_IA1.pdb
