@@ -21,6 +21,7 @@ namespace WindowsFormsApp1
         int y = 0;
         SpeechRecognitionEngine recEngine = new SpeechRecognitionEngine();
         SpeechSynthesizer  sSynth = new SpeechSynthesizer();
+        
         PromptBuilder pBuild = new PromptBuilder();
         Thread agent;
      
@@ -29,7 +30,7 @@ namespace WindowsFormsApp1
         public FormView()
 		{
 			InitializeComponent();
-            
+            sSynth.SelectVoiceByHints(VoiceGender.Female);
             matriz = new Mapa(m, n, 100);
             agent = new Thread(IniAgente);
 
@@ -54,17 +55,18 @@ namespace WindowsFormsApp1
 
 
             Choices commands = new Choices();
-            commands.Add(new string[] { "n", "s","w","east","hello" });
+            commands.Add(new string[] { "n","north","up", "s","south","down","w","west","left","east","e","right","hello" });
             GrammarBuilder gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
 
             Grammar grammar = new Grammar(gBuilder);
 
             recEngine.LoadGrammarAsync(grammar);
+
             recEngine.SetInputToDefaultAudioDevice();
             recEngine.SpeechRecognized += recEngine_SpeechRecognized;
             pBuild.ClearContent();
-            pBuild.AppendText("Where to move?");
+            pBuild.AppendText("Where to go?");
 
             Agente();
         }
@@ -84,7 +86,6 @@ namespace WindowsFormsApp1
                 }
             }
             recEngine.RecognizeAsyncStop();
-            recEngine.SpeechRecognized += recEngine_SpeechRecognized;
             Agente();
         }
 
@@ -99,7 +100,35 @@ namespace WindowsFormsApp1
                     }
                     System.Console.WriteLine("up");
                     break;
+                case "north":
+                    if (matriz.moverNorte())
+                    {
+                        y -= size;
+                    }
+                    System.Console.WriteLine("up");
+                    break;
+                case "up":
+                    if (matriz.moverNorte())
+                    {
+                        y -= size;
+                    }
+                    System.Console.WriteLine("up");
+                    break;
                 case "s":
+                    if (matriz.moverSur())
+                    {
+                        y += size;
+                    }
+                    System.Console.WriteLine("down");
+                    break;
+                case "south":
+                    if (matriz.moverSur())
+                    {
+                        y += size;
+                    }
+                    System.Console.WriteLine("down");
+                    break;
+                case "down":
                     if (matriz.moverSur())
                     {
                         y += size;
@@ -113,7 +142,35 @@ namespace WindowsFormsApp1
                     }
                     System.Console.WriteLine("left");
                     break;
+                case "west":
+                    if (matriz.moverOeste())
+                    {
+                        x -= size;
+                    }
+                    System.Console.WriteLine("left");
+                    break;
+                case "left":
+                    if (matriz.moverOeste())
+                    {
+                        x -= size;
+                    }
+                    System.Console.WriteLine("left");
+                    break;
                 case "east":
+                    if (matriz.moverEste())
+                    {
+                        x += size;
+                    }
+                    System.Console.WriteLine("right");
+                    break;
+                case "e":
+                    if (matriz.moverEste())
+                    {
+                        x += size;
+                    }
+                    System.Console.WriteLine("right");
+                    break;
+                case "right":
                     if (matriz.moverEste())
                     {
                         x += size;
@@ -126,6 +183,7 @@ namespace WindowsFormsApp1
                     System.Console.WriteLine("hello");
                     break;
             }
+            System.Console.WriteLine(er.Result.Text);
             matriz.imprimirArreglo();
         }
 
@@ -153,7 +211,7 @@ namespace WindowsFormsApp1
 
                     if (matriz.getElementoPos(i, b) == 1)
                     {
-                        e.Graphics.FillRectangle(Brushes.Black, i * size, b * size, size, size);
+                        e.Graphics.FillRectangle(Brushes.Black, b * size, i * size, size, size);
                     }
                     if (matriz.getElementoPos(i, b) == 5)
                     {
@@ -164,11 +222,11 @@ namespace WindowsFormsApp1
                     }
                     if (matriz.getElementoPos(i, b) == 3)
                     {
-                        e.Graphics.FillRectangle(Brushes.Cyan, i * size, b * size, size, size);
+                        e.Graphics.FillRectangle(Brushes.Cyan, b * size, i * size, size, size);
                     }
                     if (matriz.getElementoPos(i, b) == 4)
                     {
-                        e.Graphics.FillRectangle(Brushes.Red, i * size, b * size, size, size);
+                        e.Graphics.FillRectangle(Brushes.Red, b * size, i * size, size, size);
                     }
                 }
 
