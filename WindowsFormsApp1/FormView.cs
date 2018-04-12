@@ -15,8 +15,8 @@ namespace WindowsFormsApp1
 
 		static Mapa matriz;
         int size = 10;
-        int m = 20;
-        int n = 10;
+        int m = 30;
+        int n = 20;
         int x = 0;
         int y = 0;
         SpeechRecognitionEngine recEngine = new SpeechRecognitionEngine();
@@ -36,14 +36,25 @@ namespace WindowsFormsApp1
 
             matriz = new Mapa(m, n, 100);
 
+            
+            
             matriz.setElementoPos(0, 0, 2);
-            matriz.setElementoPos(19, 9, 4);
             matriz.colocarInicio(0, 0);
-            matriz.colocarFinal(19, 9);
 
-            matriz.colocarObstaculos(20);
+            Random rnd = new Random();
+            int randX = rnd.Next(m-10, m);
+            int randY = rnd.Next(n-10, n);
+            matriz.setElementoPos(randX, randY, 4);
+            matriz.colocarFinal(randX, randY);
+            
 
-           
+            matriz.colocarObstaculos((m*n)/7);
+            
+            
+
+            
+         
+            matriz.imprimirArreglo();
             agent.Start();
 
         }
@@ -55,7 +66,7 @@ namespace WindowsFormsApp1
 
 
             Choices commands = new Choices();
-            commands.Add(new string[] { "n","north","up", "s","south","down","w","west","left","east","e","right","hello" });
+            commands.Add(new string[] { "n","north","up", "s","south","down","w","west","left","east","e","right","hello","show route" });
             GrammarBuilder gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
 
@@ -66,7 +77,7 @@ namespace WindowsFormsApp1
             recEngine.SetInputToDefaultAudioDevice();
             recEngine.SpeechRecognized += recEngine_SpeechRecognized;
             pBuild.ClearContent();
-            pBuild.AppendText("Where to go?");
+            pBuild.AppendText("What to do now?");
 
             Agente();
         }
@@ -182,9 +193,14 @@ namespace WindowsFormsApp1
                     Invalidate();
                     System.Console.WriteLine("hello");
                     break;
+                case "show route":
+                    matriz.limpiarRuta();
+                    matriz.crearRuta();
+                    System.Console.WriteLine("show route");
+                    break;
             }
             System.Console.WriteLine(er.Result.Text);
-            matriz.imprimirArreglo();
+            //matriz.imprimirArreglo();
         }
 
         
