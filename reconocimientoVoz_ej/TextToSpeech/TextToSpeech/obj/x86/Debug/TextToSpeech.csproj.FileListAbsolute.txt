@@ -23,3 +23,16 @@ C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\Te
 C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.g.resources
 C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.Properties.Resources.resources
 C:\Users\Karen\Documents\IA\ProyectoI\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.csproj.GenerateResource.Cache
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\bin\Debug\TextToSpeech.exe
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\bin\Debug\TextToSpeech.pdb
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.csprojResolveAssemblyReference.cache
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\obj\x86\Debug\MainWindow.baml
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\obj\x86\Debug\MainWindow.g.cs
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\obj\x86\Debug\App.g.cs
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech_MarkupCompile.cache
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.g.resources
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.Properties.Resources.resources
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.csproj.GenerateResource.cache
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.csproj.CoreCompileInputs.cache
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.exe
+E:\GitHub\IA-proy1\reconocimientoVoz_ej\TextToSpeech\TextToSpeech\obj\x86\Debug\TextToSpeech.pdb
