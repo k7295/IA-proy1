@@ -36,7 +36,13 @@ namespace WindowsFormsApp1
 		{
 			InitializeComponent();
             matriz = new Mapa(m, n, size);
-            
+            pBuild.ClearContent();
+            pBuild.AppendText("Welcome to the maze game,");
+            sSynth.Speak(pBuild);
+            pBuild.ClearContent();
+            pBuild.AppendText("Please follow all the instrustions");
+            sSynth.Speak(pBuild);
+
             newGame();
             /*startGame();
             newGameFlag = false;*/
@@ -78,6 +84,12 @@ namespace WindowsFormsApp1
             {
                 pBuild.ClearContent();
                 pBuild.AppendText("What to do now?");
+            }
+
+            if (sizeFlag)
+            {
+                pBuild.ClearContent();
+                pBuild.AppendText("What is the size value, have to be between five to twenty?");
             }
             sSynth.Speak(pBuild);
             DateTime localDate = DateTime.Now;
@@ -304,7 +316,7 @@ namespace WindowsFormsApp1
                 case "new game":
                     newGame();
                     newGameFlag = true;
-                    pBuild.AppendText("new game");
+                    pBuild.AppendText("making new game");
                     break;
                 case "start game":
                     if(nFlag == false && mFlag == false && newGameFlag == true)
@@ -774,8 +786,8 @@ namespace WindowsFormsApp1
             matriz.colocarInicio(tempM, tempN);
 
             Random rnd = new Random();
-            int randX = rnd.Next(m - m/7, m);
-            int randY = rnd.Next(n - n/7, n);
+            int randX = rnd.Next(0, m);
+            int randY = rnd.Next(0, n);
             matriz.setElementoPos(randX, randY, 4);
             matriz.colocarFinal(randX, randY);
             matriz.colocarObstaculos((m * n) / 7);
