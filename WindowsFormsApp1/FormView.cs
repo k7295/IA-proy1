@@ -328,6 +328,9 @@ namespace WindowsFormsApp1
                         pBuild.AppendText("Diagonal is disabled, Use, Enable diagonal, to move south west");
                     }
                     break;
+                case "hello":
+                    pBuild.AppendText("Hi, how are u doing");
+                    break;
                 case "new game":
                     newGame();
                     newGameFlag = true;
@@ -732,7 +735,9 @@ namespace WindowsFormsApp1
                         startGame();
                         pBuild.AppendText("Game starting");
                     }
-
+                    break;
+                case "fuck you":
+                    pBuild.AppendText("No, fuck you");
                     break;
             }
             
@@ -783,7 +788,8 @@ namespace WindowsFormsApp1
                                         "south west",
                                         "five","six","seven","eight","nine","ten",
                                         "eleven","twelve","thirteen","fourteen","fifteen",
-                                        "sixteen","seventeen","eighteen","nineteen","twenty","thirty","forty","fifty"
+                                        "sixteen","seventeen","eighteen","nineteen","twenty","thirty","forty","fifty",
+                                        "fuck you"
             });
             gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
