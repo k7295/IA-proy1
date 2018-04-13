@@ -23,6 +23,7 @@ namespace WindowsFormsApp1
         bool nFlag = false;
         bool mFlag = false;
         bool newGameFlag = true;
+        bool gameOverFlag = false;
         SpeechRecognitionEngine recEngine = new SpeechRecognitionEngine();
         SpeechSynthesizer  sSynth = new SpeechSynthesizer();
 
@@ -36,6 +37,14 @@ namespace WindowsFormsApp1
 		{
 			InitializeComponent();
             matriz = new Mapa(m, n, size);
+            
+
+            //newGame();
+            startGame();
+            newGameFlag = false;
+
+            agent = new Thread(IniAgente);
+
             pBuild.ClearContent();
             pBuild.AppendText("Welcome to the maze game,");
             sSynth.Speak(pBuild);
@@ -43,13 +52,6 @@ namespace WindowsFormsApp1
             pBuild.AppendText("Please follow all the instrustions");
             sSynth.Speak(pBuild);
 
-            newGame();
-            /*startGame();
-            newGameFlag = false;*/
-
-            agent = new Thread(IniAgente);
-            
-            
             agent.Start();
 
         }
@@ -91,19 +93,32 @@ namespace WindowsFormsApp1
                 pBuild.ClearContent();
                 pBuild.AppendText("What is the size value, have to be between five to twenty?");
             }
-            sSynth.Speak(pBuild);
-            DateTime localDate = DateTime.Now;
-            recEngine.RecognizeAsync();
-            while (true)
+            if (matriz.inicioY == matriz.finalY && matriz.inicioX == matriz.finalX)
             {
-                DateTime localDatenew = DateTime.Now;
-                if ((localDatenew - localDate).TotalSeconds > 5)
-                {
-                    break;
-                }
+                pBuild.ClearContent();
+                pBuild.AppendText("Congratulations, you finished the game");
+                sSynth.Speak(pBuild);
+                newGameFlag = true;
+                newGame();
             }
-            recEngine.RecognizeAsyncStop();
-            Agente();
+
+
+            sSynth.Speak(pBuild);
+
+            
+                DateTime localDate = DateTime.Now;
+                recEngine.RecognizeAsync();
+                while (true)
+                {
+                    DateTime localDatenew = DateTime.Now;
+                    if ((localDatenew - localDate).TotalSeconds > 5)
+                    {
+                        break;
+                    }
+                }
+                recEngine.RecognizeAsyncStop();
+                Agente();
+            
         }
 
         public void recEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs er)
@@ -778,15 +793,17 @@ namespace WindowsFormsApp1
             recEngine.LoadGrammarAsync(grammar);
 
             matriz = new Mapa(m, n, size);
-            int tempM = m / 2;
-            int tempN = n / 2;
+            Random rnd = new Random();
+            int tempM = rnd.Next(0, m);
+            int tempN = rnd.Next(0, n);
             x += (size * tempN);
             y += (size * tempM);
-            matriz.setElementoPos(tempM, tempM, 2);
+            matriz.setElementoPos(tempM, tempN, 2);
             matriz.colocarInicio(tempM, tempN);
 
-            Random rnd = new Random();
+           
             int randX = rnd.Next(0, m);
+
             int randY = rnd.Next(0, n);
             matriz.setElementoPos(randX, randY, 4);
             matriz.colocarFinal(randX, randY);
@@ -815,13 +832,7 @@ namespace WindowsFormsApp1
                     {
                         e.Graphics.FillRectangle(Brushes.Black, b * size, i * size, size, size);
                     }
-                    if (matriz.getElementoPos(i, b) == 5)
-                    {
-                        x = i * size;
-                        y = i * size;
-                        e.Graphics.FillRectangle(Brushes.LightGreen,x, y , size, size);
-                        
-                    }
+
                     if (matriz.getElementoPos(i, b) == 3)
                     {
                         e.Graphics.FillRectangle(Brushes.Cyan, b * size, i * size, size, size);
