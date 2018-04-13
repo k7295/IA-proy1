@@ -15,13 +15,18 @@ namespace WindowsFormsApp1
 
 		static Mapa matriz;
         int size = 10;
-        int m = 30;
-        int n = 20;
+        int m = 50;
+        int n = 50;
         int x = 0;
         int y = 0;
+        bool sizeFlag = false;
+        bool nFlag = false;
+        bool mFlag = false;
+        bool newGameFlag = true;
         SpeechRecognitionEngine recEngine = new SpeechRecognitionEngine();
         SpeechSynthesizer  sSynth = new SpeechSynthesizer();
-        
+
+        GrammarBuilder gBuilder; 
         PromptBuilder pBuild = new PromptBuilder();
         Thread agent;
      
@@ -30,27 +35,15 @@ namespace WindowsFormsApp1
         public FormView()
 		{
 			InitializeComponent();
-            sSynth.SelectVoiceByHints(VoiceGender.Female);
-            matriz = new Mapa(m, n, 100);
+            matriz = new Mapa(m, n, size);
+            
+            newGame();
+            /*startGame();
+            newGameFlag = false;*/
+
             agent = new Thread(IniAgente);
             
-            matriz.setElementoPos(0, 0, 2);
-            matriz.colocarInicio(0, 0);
-
-            Random rnd = new Random();
-            int randX = rnd.Next(m-10, m);
-            int randY = rnd.Next(n-10, n);
-            matriz.setElementoPos(randX, randY, 4);
-            matriz.colocarFinal(randX, randY);
             
-
-            matriz.colocarObstaculos((m*n)/7);
-            
-            
-
-            
-         
-            matriz.imprimirArreglo();
             agent.Start();
 
         }
@@ -59,24 +52,6 @@ namespace WindowsFormsApp1
 
         public void IniAgente()
         {
-
-
-            Choices commands = new Choices();
-            commands.Add(new string[] { "n","north","up",
-                                        "s","south","down",
-                                        "w","west","left",
-                                        "e","east","right",
-                                        "hello",
-                                        "show route" ,
-                                        "enable diagonal",
-                                        "disable diagonal",
-                                        "new"});
-            GrammarBuilder gBuilder = new GrammarBuilder();
-            gBuilder.Append(commands);
-
-            Grammar grammar = new Grammar(gBuilder);
-
-            recEngine.LoadGrammarAsync(grammar);
 
             recEngine.SetInputToDefaultAudioDevice();
             recEngine.SpeechRecognized += recEngine_SpeechRecognized;
@@ -88,7 +63,22 @@ namespace WindowsFormsApp1
 
         public void Agente()
         {
-            
+            if (mFlag)
+            {
+                pBuild.ClearContent();
+                pBuild.AppendText("What is the value for m, Can be between five to twenty. thirty,forty,or fifty");
+
+            }
+            if (nFlag)
+            {
+                pBuild.ClearContent();
+                pBuild.AppendText("What is the value for n, Can be between five to twenty. thirty,forty,or fifty");
+            }
+            if (!newGameFlag)
+            {
+                pBuild.ClearContent();
+                pBuild.AppendText("What to do now?");
+            }
             sSynth.Speak(pBuild);
             DateTime localDate = DateTime.Now;
             recEngine.RecognizeAsync();
@@ -106,41 +96,44 @@ namespace WindowsFormsApp1
 
         public void recEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs er)
         {
+            pBuild.ClearContent();
             switch (er.Result.Text)
             {
-                case "n":
-                    if (matriz.moverNorte())
-                    {
-
-                        y -= size;
-                    }
-                    System.Console.WriteLine("up");
-                    break;
+       
                 case "north":
                     if (matriz.moverNorte())
                     {
                         y -= size;
+                        pBuild.AppendText("moving up");
+                    }
+                    else
+                    {
+                        pBuild.AppendText("can't move up");
                     }
                     System.Console.WriteLine("up");
                     break;
                 case "up":
-                    if (matriz.moverNorte())
+                    if(matriz.moverNorte())
                     {
                         y -= size;
+                        pBuild.AppendText("moving up");
+                    }
+                    else
+                    {
+                        pBuild.AppendText("can't move up");
                     }
                     System.Console.WriteLine("up");
                     break;
-                case "s":
-                    if (matriz.moverSur())
-                    {
-                        y += size;
-                    }
-                    System.Console.WriteLine("down");
-                    break;
+           
                 case "south":
                     if (matriz.moverSur())
                     {
                         y += size;
+                        pBuild.AppendText("moving down");
+                    }
+                    else
+                    {
+                        pBuild.AppendText("can not move down");
                     }
                     System.Console.WriteLine("down");
                     break;
@@ -148,20 +141,24 @@ namespace WindowsFormsApp1
                     if (matriz.moverSur())
                     {
                         y += size;
+                        pBuild.AppendText("moving down");
+                    }
+                    else
+                    {
+                        pBuild.AppendText("can not move down");
                     }
                     System.Console.WriteLine("down");
                     break;
-                case "w":
-                    if (matriz.moverOeste())
-                    {
-                        x -= size;
-                    }
-                    System.Console.WriteLine("left");
-                    break;
+                
                 case "west":
                     if (matriz.moverOeste())
                     {
                         x -= size;
+                        pBuild.AppendText("moving left");
+                    }
+                    else
+                    {
+                        pBuild.AppendText("can not move left");
                     }
                     System.Console.WriteLine("left");
                     break;
@@ -169,73 +166,620 @@ namespace WindowsFormsApp1
                     if (matriz.moverOeste())
                     {
                         x -= size;
+                        pBuild.AppendText("moving left");
+                    }
+                    else
+                    {
+                        pBuild.AppendText("can not move left");
                     }
                     System.Console.WriteLine("left");
                     break;
                 case "east":
                     if (matriz.moverEste())
                     {
+                        pBuild.AppendText("moving right");
                         x += size;
                     }
-                    System.Console.WriteLine("right");
-                    break;
-                case "e":
-                    if (matriz.moverEste())
+                    else
                     {
-                        x += size;
+                        pBuild.AppendText("can not move right");
                     }
                     System.Console.WriteLine("right");
                     break;
+                
                 case "right":
                     if (matriz.moverEste())
                     {
+                        pBuild.AppendText("moving right");
                         x += size;
                     }
+                    else
+                    {
+                        pBuild.AppendText("can not move right");
+                    }
                     System.Console.WriteLine("right");
-                    break;
-                case "hello1":
-                    
-                    Invalidate();
-                    System.Console.WriteLine("hello");
                     break;
                 case "show route":
                     matriz.limpiarRuta();
                     matriz.crearRuta();
+                    pBuild.AppendText("Showing route");
                     System.Console.WriteLine("show route");
+                    break;
+                case "clean":
+                    matriz.limpiarRuta();
+                    pBuild.AppendText("route cleaned");
+                    System.Console.WriteLine("clean route");
                     break;
                 case "enable diagonal":
                     matriz.enableDiagonal();
+                    pBuild.AppendText("Diagonal enabled");
                     System.Console.WriteLine("enable Diagonal");
                     break;
                 case "disable diagonal":
                     matriz.disableDiagonal();
+                    pBuild.AppendText("Diagonal disabled");
                     System.Console.WriteLine("disable diagonal");
                     break;
-                case "hello":
-                    matriz = new Mapa(m, n, 100);
-                    matriz.setElementoPos(0, 0, 2);
-                    matriz.colocarInicio(0, 0);
-             
-                    Random rnd = new Random();
-                    int randX = rnd.Next(m - 10, m);
-                    int randY = rnd.Next(n - 10, n);
-                    matriz.setElementoPos(randX, randY, 4);
-                    matriz.colocarFinal(randX, randY);
-                    matriz.colocarObstaculos((m * n) / 7);
+                case "size":
+                    sizeFlag = true;
+                    pBuild.AppendText("Please set a size, Five to twenty");
+                    System.Console.WriteLine("size");
+                    break;
+                case "north east":
+                    if (matriz.modoDiagonal)
+                    {
+                        if (matriz.moverNorEste())
+                        {
+                            pBuild.AppendText("moving north east");
+                            y -= size;
+                            x += size;
+                        }
+                        else
+                        {
+                            pBuild.AppendText("can not move north east");
+                        }
+                    }
+                    else
+                    {
+                        pBuild.AppendText("Diagonal is disabled, Use, Enable diagonal, to move north east");
+                    }
+                    break;
+                case "north west":
+                    if (matriz.modoDiagonal)
+                    {
+                        if (matriz.moverNorOeste())
+                        {
+                            pBuild.AppendText("moving north west");
+                            y -= size;
+                            x -= size;
+                        }
+                        else
+                        {
+                            pBuild.AppendText("can not move north west");
+                        }
+                    }
+                    else
+                    {
+                        pBuild.AppendText("Diagonal is disabled, Use, Enable diagonal, to move norht west");
+                    }
+                    break;
+                case "south east":
+                    if (matriz.modoDiagonal)
+                    {
+                        if (matriz.moverSurEste())
+                        {
+                            pBuild.AppendText("moving south east");
+                            y += size;
+                            x += size;
+                        }
+                        else
+                        {
+                            pBuild.AppendText("can not move south east");
+                        }
+                    }
+                    else
+                    {
+                        pBuild.AppendText("Diagonal is disabled, Use, Enable diagonal, to move south east");
+                    }
+                    break;
+                case "south west":
+                    if (matriz.modoDiagonal)
+                    {
+                        if (matriz.moverSurOeste())
+                        {
+                            pBuild.AppendText("moving south west");
+                            y -= size;
+                            x += size;
+                        }
+                        else
+                        {
+                            pBuild.AppendText("can not move south west");
+                        }
+                    }
+                    else
+                    {
+                        pBuild.AppendText("Diagonal is disabled, Use, Enable diagonal, to move south west");
+                    }
+                    break;
+                case "new game":
+                    newGame();
+                    newGameFlag = true;
+                    pBuild.AppendText("new game");
+                    break;
+                case "start game":
+                    if(nFlag == false && mFlag == false && newGameFlag == true)
+                    {
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "five":
+                    if (sizeFlag)
+                    {
+                        size = 5;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 5;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 5;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "six":
+                    if (sizeFlag)
+                    {
+                        size = 6;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 6;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 6;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "seven":
+                    if (sizeFlag)
+                    {
+                        size = 7;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 7;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 7;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "eight":
+                    if (sizeFlag)
+                    {
+                        size = 8;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 8;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 8;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+
+                    break;
+                case "nine":
+                    if (sizeFlag)
+                    {
+                        size = 9;
+                        sizeFlag = false;
+                    }
+                    
+                    if (mFlag)
+                    {
+                        m =9;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 9;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "ten":
+                    if (sizeFlag)
+                    {
+                        size = 10;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 10;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 10;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "eleven":
+                    if (sizeFlag)
+                    {
+                        size = 11;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 11;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 11;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "twelve":
+                    if (sizeFlag)
+                    {
+                        size = 12;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 12;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 12;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "thirteen":
+                    if (sizeFlag)
+                    {
+                        size = 13;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 13;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 13;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "fourteen":
+                    if (sizeFlag)
+                    {
+                        size = 14;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 14;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 14;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "fifth":
+                    if (sizeFlag)
+                    {
+                        size = 15;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 15;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 15;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "sixteen":
+                    if (sizeFlag)
+                    {
+                        size = 16;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 16;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 16;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "seventeen":
+                    if (sizeFlag)
+                    {
+                        size = 17;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 17;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 17;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "eighteen":
+                    if (sizeFlag)
+                    {
+                        size = 18;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 18;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 18;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "nineteen":
+                    if (sizeFlag)
+                    {
+                        size = 19;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 19;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 19;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "twenty":
+                    if (sizeFlag)
+                    {
+                        size = 20;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 20;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 20;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "thirty":
+                    if (sizeFlag)
+                    {
+                        size = 30;
+                        sizeFlag = false;
+                    }
+                    if (mFlag)
+                    {
+                        m = 30;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 30;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    break;
+                case "forty":
+                    if (mFlag)
+                    {
+                        m = 40;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 40;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+                    
+                    break;
+                case "fifty":
+                    if (mFlag)
+                    {
+                        m = 50;
+                        mFlag = false;
+                        nFlag = true;
+                    }
+                    if (nFlag)
+                    {
+                        n = 50;
+                        nFlag = false;
+                        newGameFlag = false;
+                        startGame();
+                        pBuild.AppendText("Game starting");
+                    }
+
                     break;
             }
-            pBuild.ClearContent();
-            pBuild.AppendText(er.Result.Text);
+            
             sSynth.Speak(pBuild);
 
             pBuild.ClearContent();
             pBuild.AppendText("What to do now?");
-            //matriz.imprimirArreglo();
+            
         }
 
         
 
-		
+		public void newGame()
+        {
+            Choices commands = new Choices();
+            commands.Add(new string[] { "start game",
+                                        "five","six","seven","eight","nine","ten",
+                                        "eleven","twelve","thirteen","fourteen","fifteen",
+                                        "sixteen","seventeen","eighteen","nineteen","twenty","thirty","forty","fifty"
+            });
+            gBuilder = new GrammarBuilder();
+            gBuilder.Append(commands);
+
+            Grammar grammar = new Grammar(gBuilder);
+
+            recEngine.LoadGrammarAsync(grammar);
+            mFlag = true;
+            
+        }
+
+        public void startGame()
+        {
+            Choices commands = new Choices();
+            commands.Add(new string[] { "north","up",
+                                        "south","down",
+                                        "west","left",
+                                        "east","right",
+                                        "hello",
+                                        "show route" ,
+                                        "enable diagonal",
+                                        "disable diagonal",
+                                        "new game",
+                                        "clean",
+                                        "size",
+                                        "north east",
+                                        "north west",
+                                        "south east",
+                                        "south west",
+                                        "five","six","seven","eight","nine","ten",
+                                        "eleven","twelve","thirteen","fourteen","fifteen",
+                                        "sixteen","seventeen","eighteen","nineteen","twenty","thirty","forty","fifty"
+            });
+            gBuilder = new GrammarBuilder();
+            gBuilder.Append(commands);
+
+            Grammar grammar = new Grammar(gBuilder);
+
+            recEngine.LoadGrammarAsync(grammar);
+
+            matriz = new Mapa(m, n, size);
+            int tempM = m / 2;
+            int tempN = n / 2;
+            x += (size * tempN);
+            y += (size * tempM);
+            matriz.setElementoPos(tempM, tempM, 2);
+            matriz.colocarInicio(tempM, tempN);
+
+            Random rnd = new Random();
+            int randX = rnd.Next(m - m/7, m);
+            int randY = rnd.Next(n - n/7, n);
+            matriz.setElementoPos(randX, randY, 4);
+            matriz.colocarFinal(randX, randY);
+            matriz.colocarObstaculos((m * n) / 7);
+        }
 
        
 
