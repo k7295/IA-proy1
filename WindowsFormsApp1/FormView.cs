@@ -15,8 +15,8 @@ namespace WindowsFormsApp1
 
 		static Mapa matriz;
         int size = 10;
-        int m = 50;
-        int n = 50;
+        int m = 10;
+        int n = 30;
         int x = 0;
         int y = 0;
         bool sizeFlag = false;
@@ -49,7 +49,7 @@ namespace WindowsFormsApp1
             pBuild.AppendText("Welcome to the maze game,");
             sSynth.Speak(pBuild);
             pBuild.ClearContent();
-            pBuild.AppendText("Please follow all the instrustions");
+            pBuild.AppendText("Please follow all the instructions");
             sSynth.Speak(pBuild);
 
             agent.Start();
@@ -315,8 +315,8 @@ namespace WindowsFormsApp1
                         if (matriz.moverSurOeste())
                         {
                             pBuild.AppendText("moving south west");
-                            y -= size;
-                            x += size;
+                            y += size;
+                            x -= size;
                         }
                         else
                         {
@@ -737,7 +737,7 @@ namespace WindowsFormsApp1
             }
             
             sSynth.Speak(pBuild);
-
+            matriz.imprimirArreglo();
             pBuild.ClearContent();
             pBuild.AppendText("What to do now?");
             
@@ -794,10 +794,10 @@ namespace WindowsFormsApp1
 
             matriz = new Mapa(m, n, size);
             Random rnd = new Random();
-            int tempM = rnd.Next(0, m);
-            int tempN = rnd.Next(0, n);
-            x += (size * tempN);
-            y += (size * tempM);
+            int tempM = rnd.Next(1, m);
+            int tempN = rnd.Next(1, n);
+            y += (size * (tempM));
+            x += (size * (tempN));
             matriz.setElementoPos(tempM, tempN, 2);
             matriz.colocarInicio(tempM, tempN);
 
@@ -808,6 +808,7 @@ namespace WindowsFormsApp1
             matriz.setElementoPos(randX, randY, 4);
             matriz.colocarFinal(randX, randY);
             matriz.colocarObstaculos((m * n) / 7);
+            matriz.modoDiagonal = true;
         }
 
        
