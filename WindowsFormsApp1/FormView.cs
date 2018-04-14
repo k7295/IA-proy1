@@ -15,15 +15,12 @@ namespace WindowsFormsApp1
 
 		static Mapa matriz;
         int size = 10;
-        int m = 10;
-        int n = 30;
-        int x = 0;
-        int y = 0;
+        int m = 50;
+        int n = 50;
         bool sizeFlag = false;
         bool nFlag = false;
         bool mFlag = false;
         bool newGameFlag = true;
-        bool gameOverFlag = false;
         SpeechRecognitionEngine recEngine = new SpeechRecognitionEngine();
         SpeechSynthesizer  sSynth = new SpeechSynthesizer();
 
@@ -49,7 +46,10 @@ namespace WindowsFormsApp1
             pBuild.AppendText("Welcome to the maze game,");
             sSynth.Speak(pBuild);
             pBuild.ClearContent();
-            pBuild.AppendText("Please follow all the instructions");
+            pBuild.AppendText("Please follow all the instructions,");
+            sSynth.Speak(pBuild);
+            pBuild.ClearContent();
+            pBuild.AppendText("Use the command help to find all instructions available");
             sSynth.Speak(pBuild);
 
             agent.Start();
@@ -130,7 +130,6 @@ namespace WindowsFormsApp1
                 case "north":
                     if (matriz.moverNorte())
                     {
-                        y -= size;
                         pBuild.AppendText("moving up");
                     }
                     else
@@ -142,7 +141,6 @@ namespace WindowsFormsApp1
                 case "up":
                     if(matriz.moverNorte())
                     {
-                        y -= size;
                         pBuild.AppendText("moving up");
                     }
                     else
@@ -155,7 +153,6 @@ namespace WindowsFormsApp1
                 case "south":
                     if (matriz.moverSur())
                     {
-                        y += size;
                         pBuild.AppendText("moving down");
                     }
                     else
@@ -167,7 +164,6 @@ namespace WindowsFormsApp1
                 case "down":
                     if (matriz.moverSur())
                     {
-                        y += size;
                         pBuild.AppendText("moving down");
                     }
                     else
@@ -180,7 +176,6 @@ namespace WindowsFormsApp1
                 case "west":
                     if (matriz.moverOeste())
                     {
-                        x -= size;
                         pBuild.AppendText("moving left");
                     }
                     else
@@ -192,7 +187,6 @@ namespace WindowsFormsApp1
                 case "left":
                     if (matriz.moverOeste())
                     {
-                        x -= size;
                         pBuild.AppendText("moving left");
                     }
                     else
@@ -205,7 +199,6 @@ namespace WindowsFormsApp1
                     if (matriz.moverEste())
                     {
                         pBuild.AppendText("moving right");
-                        x += size;
                     }
                     else
                     {
@@ -218,7 +211,6 @@ namespace WindowsFormsApp1
                     if (matriz.moverEste())
                     {
                         pBuild.AppendText("moving right");
-                        x += size;
                     }
                     else
                     {
@@ -258,8 +250,6 @@ namespace WindowsFormsApp1
                         if (matriz.moverNorEste())
                         {
                             pBuild.AppendText("moving north east");
-                            y -= size;
-                            x += size;
                         }
                         else
                         {
@@ -277,8 +267,6 @@ namespace WindowsFormsApp1
                         if (matriz.moverNorOeste())
                         {
                             pBuild.AppendText("moving north west");
-                            y -= size;
-                            x -= size;
                         }
                         else
                         {
@@ -296,8 +284,6 @@ namespace WindowsFormsApp1
                         if (matriz.moverSurEste())
                         {
                             pBuild.AppendText("moving south east");
-                            y += size;
-                            x += size;
                         }
                         else
                         {
@@ -315,8 +301,6 @@ namespace WindowsFormsApp1
                         if (matriz.moverSurOeste())
                         {
                             pBuild.AppendText("moving south west");
-                            y += size;
-                            x -= size;
                         }
                         else
                         {
@@ -327,6 +311,9 @@ namespace WindowsFormsApp1
                     {
                         pBuild.AppendText("Diagonal is disabled, Use, Enable diagonal, to move south west");
                     }
+                    break;
+                case "hello":
+                    pBuild.AppendText("Hi, how are u doing");
                     break;
                 case "new game":
                     newGame();
@@ -604,6 +591,7 @@ namespace WindowsFormsApp1
                     if (mFlag)
                     {
                         m = 17;
+
                         mFlag = false;
                         nFlag = true;
                     }
@@ -732,7 +720,31 @@ namespace WindowsFormsApp1
                         startGame();
                         pBuild.AppendText("Game starting");
                     }
-
+                    break;
+                case "fuck you":
+                    pBuild.AppendText("No, fuck you");
+                    break;
+                case "you suck":
+                    pBuild.AppendText("No, you suck, this code is full of bugs");
+                    break;
+                case "new end":
+                    randEnd();
+                    pBuild.AppendText("Destination changed");
+                    break;
+                case "new start":
+                    randStart();
+                    pBuild.AppendText("Start changed");
+                    break;
+                case "help":
+                    pBuild.AppendText("To move upwards, use up or north," +
+                        " to move downwards, use down or south, to move to " +
+                        "the left, use left or west, to move to the right, " +
+                        "use right or east, To show the route to the destination," +
+                        " use show route, to clean the route, use clean, to " +
+                        "enable diagonals, use enable diagonal, " +
+                        "to disable diagonals, use disable diagonal, to change the " +
+                        "size, use size, to change the destination, use new end," +
+                        " to change the start, use new start, for a new game, use new game,");
                     break;
             }
             
@@ -742,16 +754,35 @@ namespace WindowsFormsApp1
             pBuild.AppendText("What to do now?");
             
         }
+        public void randEnd()
+        {
+            Random rnd = new Random();
+            matriz.setElementoPos(matriz.finalX, matriz.finalY, 0);
+            int randX = rnd.Next(0, m);
+            int randY = rnd.Next(0, n);
+            matriz.setElementoPos(randX, randY, 4);
+            matriz.colocarFinal(randX, randY);
+        }
 
-        
+        public void randStart()
+        {
+            
+            Random rnd = new Random();
+            matriz.setElementoPos(matriz.inicioX, matriz.inicioY, 0);
+            int tempM = rnd.Next(1, m);
+            int tempN = rnd.Next(1, n);
+            matriz.setElementoPos(tempM, tempN, 2);
+            matriz.colocarInicio(tempM, tempN);
+        }
 
-		public void newGame()
+
+        public void newGame()
         {
             Choices commands = new Choices();
             commands.Add(new string[] { "start game",
                                         "five","six","seven","eight","nine","ten",
                                         "eleven","twelve","thirteen","fourteen","fifteen",
-                                        "sixteen","seventeen","eighteen","nineteen","twenty","thirty","forty","fifty"
+                                        "sixteen","seventeen","eighteen","nineteen","twenty","thirty","forty","fifty","help"
             });
             gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
@@ -783,7 +814,8 @@ namespace WindowsFormsApp1
                                         "south west",
                                         "five","six","seven","eight","nine","ten",
                                         "eleven","twelve","thirteen","fourteen","fifteen",
-                                        "sixteen","seventeen","eighteen","nineteen","twenty","thirty","forty","fifty"
+                                        "sixteen","seventeen","eighteen","nineteen","twenty","thirty","forty","fifty",
+                                        "fuck you","you suck","new end","new start","help"
             });
             gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
@@ -794,21 +826,18 @@ namespace WindowsFormsApp1
 
             matriz = new Mapa(m, n, size);
             Random rnd = new Random();
-            int tempM = rnd.Next(1, m);
-            int tempN = rnd.Next(1, n);
-            y += (size * (tempM));
-            x += (size * (tempN));
+            int tempM = rnd.Next(0, m-1);
+            int tempN = rnd.Next(0, n-1);
             matriz.setElementoPos(tempM, tempN, 2);
             matriz.colocarInicio(tempM, tempN);
 
            
-            int randX = rnd.Next(0, m);
+            int randX = rnd.Next(0, m-1);
 
-            int randY = rnd.Next(0, n);
+            int randY = rnd.Next(0, n-1);
             matriz.setElementoPos(randX, randY, 4);
             matriz.colocarFinal(randX, randY);
-            matriz.colocarObstaculos((m * n) / 7);
-            matriz.modoDiagonal = true;
+            matriz.colocarObstaculos((m * n) / 6);
         }
 
        
@@ -823,15 +852,18 @@ namespace WindowsFormsApp1
         {
             //e.Graphics.FillRectangle(Brushes.White, new Rectangle(0, 0, 900, 900));
 
-            e.Graphics.FillRectangle(Brushes.LightGreen, x, y, size, size);
+            //e.Graphics.FillRectangle(Brushes.LightGreen, x, y, size, size);
             for (int i = 0; i < m; i++)
             {
                 for (int b = 0; b < n; b++)
                 {
-
                     if (matriz.getElementoPos(i, b) == 1)
                     {
                         e.Graphics.FillRectangle(Brushes.Black, b * size, i * size, size, size);
+                    }
+                    if (matriz.getElementoPos(i, b) == 2)
+                    {
+                        e.Graphics.FillRectangle(Brushes.LightGreen, b * size, i * size, size, size);
                     }
 
                     if (matriz.getElementoPos(i, b) == 3)

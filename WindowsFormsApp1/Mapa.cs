@@ -27,10 +27,6 @@ namespace Proyecto_IA1.Mapa
         {
             this.matriz = generarMatrizVacia(m, n, 0);
             this.tamañoCuadro = a;
-            this.distancias_M = generarMatrizVaciaInt(m, n, 0);
-            this.coste_Total = generarMatrizVaciaDouble(m, n, 0);
-            this.solucion = generarMatrizSolucion(m, n, -1, -1);
-            this.visitados = generarMatrizVisitados(m, n);
             this.m = m;
             this.n = n;
 
@@ -444,6 +440,10 @@ namespace Proyecto_IA1.Mapa
 
         public void crearRuta()
         {
+            this.distancias_M = generarMatrizVaciaInt(m, n, 0);
+            this.coste_Total = generarMatrizVaciaDouble(m, n, 0);
+            this.solucion = generarMatrizSolucion(m, n, -1, -1);
+            this.visitados = generarMatrizVisitados(m, n);
             a_estrella(modoDiagonal);
             bool termino = false;
             int[] actual = new int[2];
