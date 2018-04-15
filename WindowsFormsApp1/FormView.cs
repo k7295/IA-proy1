@@ -14,7 +14,7 @@ namespace WindowsFormsApp1
 	{
 
 		static Mapa matriz;
-        int size = 10;
+        int size = 14;
         int m = 50;
         int n = 50;
         bool sizeFlag = false;
@@ -32,6 +32,7 @@ namespace WindowsFormsApp1
 
         public FormView()
 		{
+
 			InitializeComponent();
             matriz = new Mapa(m, n, size);
             
@@ -39,9 +40,9 @@ namespace WindowsFormsApp1
             //newGame();
             startGame();
             newGameFlag = false;
-
+            
             agent = new Thread(IniAgente);
-
+            /*
             pBuild.ClearContent();
             pBuild.AppendText("Welcome to the maze game,");
             sSynth.Speak(pBuild);
@@ -51,6 +52,9 @@ namespace WindowsFormsApp1
             pBuild.ClearContent();
             pBuild.AppendText("Use the command help to find all instructions available");
             sSynth.Speak(pBuild);
+            pBuild.ClearContent();
+            pBuild.AppendText("Player is green square and destination is red square");
+            sSynth.Speak(pBuild);*/
 
             agent.Start();
 
@@ -74,13 +78,13 @@ namespace WindowsFormsApp1
             if (mFlag)
             {
                 pBuild.ClearContent();
-                pBuild.AppendText("What is the value for m, Can be between five to twenty. thirty,forty,or fifty");
+                pBuild.AppendText("What is the value for row n, Can be between five to twenty. thirty,forty,or fifty");
 
             }
             if (nFlag)
             {
                 pBuild.ClearContent();
-                pBuild.AppendText("What is the value for n, Can be between five to twenty. thirty,forty,or fifty");
+                pBuild.AppendText("What is the value for column m, Can be between five to twenty. thirty,forty,or fifty");
             }
             if (!newGameFlag)
             {
@@ -91,9 +95,9 @@ namespace WindowsFormsApp1
             if (sizeFlag)
             {
                 pBuild.ClearContent();
-                pBuild.AppendText("What is the size value, have to be between five to twenty?");
+                pBuild.AppendText("What is the size value, have to be between five to fourteen?");
             }
-            if (matriz.inicioY == matriz.finalY && matriz.inicioX == matriz.finalX)
+            if (matriz.inicioY == matriz.finalY && matriz.inicioX == matriz.finalX && !newGameFlag)
             {
                 pBuild.ClearContent();
                 pBuild.AppendText("Congratulations, you finished the game");
@@ -220,8 +224,15 @@ namespace WindowsFormsApp1
                     break;
                 case "show route":
                     matriz.limpiarRuta();
-                    matriz.crearRuta();
-                    pBuild.AppendText("Showing route");
+                    if (matriz.crearRuta())
+                    {
+                        pBuild.AppendText("Showing route");
+                    }
+                    else
+                    {
+                        pBuild.AppendText("No route is available");
+                    }
+                    
                     System.Console.WriteLine("show route");
                     break;
                 case "clean":
@@ -241,7 +252,7 @@ namespace WindowsFormsApp1
                     break;
                 case "size":
                     sizeFlag = true;
-                    pBuild.AppendText("Please set a size, Five to twenty");
+                    pBuild.AppendText("Please set a size, Five to fourteen");
                     System.Console.WriteLine("size");
                     break;
                 case "north east":
@@ -332,19 +343,28 @@ namespace WindowsFormsApp1
                     if (sizeFlag)
                     {
                         size = 5;
+                        pBuild.AppendText("Size is set to five");
                         sizeFlag = false;
+                        break;
                     }
                     if (mFlag)
                     {
                         m = 5;
                         mFlag = false;
                         nFlag = true;
+                        pBuild.AppendText("m is set to five");
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 5;
                         nFlag = false;
                         newGameFlag = false;
+
+                        pBuild.AppendText("n is set to five");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
+                        
                         startGame();
                         pBuild.AppendText("Game starting");
                     }
@@ -353,19 +373,26 @@ namespace WindowsFormsApp1
                     if (sizeFlag)
                     {
                         size = 6;
+                        pBuild.AppendText("size is set to six");
                         sizeFlag = false;
+                        break;
                     }
                     if (mFlag)
                     {
                         m = 6;
+                        pBuild.AppendText("m is set to six");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 6;
                         nFlag = false;
                         newGameFlag = false;
+                        pBuild.AppendText("n is set to six");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         startGame();
                         pBuild.AppendText("Game starting");
                     }
@@ -374,17 +401,24 @@ namespace WindowsFormsApp1
                     if (sizeFlag)
                     {
                         size = 7;
+                        pBuild.AppendText("size is set to seven");
                         sizeFlag = false;
+                        break;
                     }
                     if (mFlag)
                     {
                         m = 7;
+                        pBuild.AppendText("m is set to seven");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 7;
+                        pBuild.AppendText("n is set to seven");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -395,17 +429,24 @@ namespace WindowsFormsApp1
                     if (sizeFlag)
                     {
                         size = 8;
+                        pBuild.AppendText("size is set to eight");
                         sizeFlag = false;
+                        break;
                     }
                     if (mFlag)
                     {
                         m = 8;
+                        pBuild.AppendText("m is set to eight");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 8;
+                        pBuild.AppendText("n is set to eight");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -417,39 +458,54 @@ namespace WindowsFormsApp1
                     if (sizeFlag)
                     {
                         size = 9;
+                        pBuild.AppendText("size is set to nine");
                         sizeFlag = false;
+                        break;
                     }
                     
                     if (mFlag)
                     {
                         m =9;
+                        pBuild.AppendText("m is set to nine");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 9;
+                        pBuild.AppendText("n is set to nine");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
                         pBuild.AppendText("Game starting");
+                        break;
                     }
                     break;
                 case "ten":
                     if (sizeFlag)
                     {
                         size = 10;
+                        pBuild.AppendText("size is set to ten");
                         sizeFlag = false;
+                        break;
                     }
                     if (mFlag)
                     {
                         m = 10;
+                        pBuild.AppendText("m is set to ten");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 10;
+                        pBuild.AppendText("n is set to ten");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -460,17 +516,24 @@ namespace WindowsFormsApp1
                     if (sizeFlag)
                     {
                         size = 11;
+                        pBuild.AppendText("size is set to eleven");
                         sizeFlag = false;
+                        break;
                     }
                     if (mFlag)
                     {
                         m = 11;
+                        pBuild.AppendText("m is set to eleven");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 11;
+                        pBuild.AppendText("n is set to eleven");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -481,17 +544,24 @@ namespace WindowsFormsApp1
                     if (sizeFlag)
                     {
                         size = 12;
+                        pBuild.AppendText("size is set to twelve");
                         sizeFlag = false;
+                        break;
                     }
                     if (mFlag)
                     {
                         m = 12;
+                        pBuild.AppendText("m is set to twelve");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 12;
+                        pBuild.AppendText("n is set to twelve");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -502,17 +572,24 @@ namespace WindowsFormsApp1
                     if (sizeFlag)
                     {
                         size = 13;
+                        pBuild.AppendText("size is set to thirteen");
                         sizeFlag = false;
+                        break;
                     }
                     if (mFlag)
                     {
                         m = 13;
+                        pBuild.AppendText("m is set to thirteen");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 13;
+                        pBuild.AppendText("n is set to thirteen");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -523,17 +600,24 @@ namespace WindowsFormsApp1
                     if (sizeFlag)
                     {
                         size = 14;
+                        pBuild.AppendText("size is set to fourteen");
                         sizeFlag = false;
+                        break;
                     }
                     if (mFlag)
                     {
                         m = 14;
+                        pBuild.AppendText("m is set to fourteen");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 14;
+                        pBuild.AppendText("n is set to fourteen");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -541,20 +625,21 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "fifth":
-                    if (sizeFlag)
-                    {
-                        size = 15;
-                        sizeFlag = false;
-                    }
+                   
                     if (mFlag)
                     {
                         m = 15;
+                        pBuild.AppendText("m is set to fifth");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 15;
+                        pBuild.AppendText("n is set to fifth");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -562,20 +647,21 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "sixteen":
-                    if (sizeFlag)
-                    {
-                        size = 16;
-                        sizeFlag = false;
-                    }
+                    
                     if (mFlag)
                     {
                         m = 16;
+                        pBuild.AppendText("m is set to sixteen");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 16;
+                        pBuild.AppendText("n is set to sixteen");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -583,21 +669,21 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "seventeen":
-                    if (sizeFlag)
-                    {
-                        size = 17;
-                        sizeFlag = false;
-                    }
+                    
                     if (mFlag)
                     {
                         m = 17;
-
+                        pBuild.AppendText("m is set to seventeen");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 17;
+                        pBuild.AppendText("n is set to seventeen");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -605,20 +691,21 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "eighteen":
-                    if (sizeFlag)
-                    {
-                        size = 18;
-                        sizeFlag = false;
-                    }
+                    
                     if (mFlag)
                     {
                         m = 18;
+                        pBuild.AppendText("m is set to eighteen");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 18;
+                        pBuild.AppendText("n is set to eighteen");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -626,20 +713,21 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "nineteen":
-                    if (sizeFlag)
-                    {
-                        size = 19;
-                        sizeFlag = false;
-                    }
+                    
                     if (mFlag)
                     {
                         m = 19;
+                        pBuild.AppendText("m is set to nineteen");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 19;
+                        pBuild.AppendText("n is set to nineteen");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -647,41 +735,45 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "twenty":
-                    if (sizeFlag)
-                    {
-                        size = 20;
-                        sizeFlag = false;
-                    }
+                    
                     if (mFlag)
                     {
                         m = 20;
+                        pBuild.AppendText("m is set to twenty");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 20;
                         nFlag = false;
                         newGameFlag = false;
+                        pBuild.AppendText("n is set to twenty");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         startGame();
                         pBuild.AppendText("Game starting");
                     }
                     break;
                 case "thirty":
-                    if (sizeFlag)
-                    {
-                        size = 30;
-                        sizeFlag = false;
-                    }
+                    
                     if (mFlag)
                     {
                         m = 30;
+                        pBuild.AppendText("m is set to thirty");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 30;
+                        pBuild.AppendText("n is set to thirty");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -692,12 +784,17 @@ namespace WindowsFormsApp1
                     if (mFlag)
                     {
                         m = 40;
+                        pBuild.AppendText("m is set to forty");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
                         n = 40;
+                        pBuild.AppendText("n is set to forty");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -709,12 +806,18 @@ namespace WindowsFormsApp1
                     if (mFlag)
                     {
                         m = 50;
+                        pBuild.AppendText("m is set to fifty");
                         mFlag = false;
                         nFlag = true;
+                        break;
                     }
                     if (nFlag)
                     {
+                        
                         n = 50;
+                        pBuild.AppendText("n is set to fifty");
+                        sSynth.Speak(pBuild);
+                        pBuild.ClearContent();
                         nFlag = false;
                         newGameFlag = false;
                         startGame();
@@ -786,7 +889,8 @@ namespace WindowsFormsApp1
             });
             gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
-
+            m = 0;
+            n = 0;
             Grammar grammar = new Grammar(gBuilder);
 
             recEngine.LoadGrammarAsync(grammar);
@@ -838,6 +942,7 @@ namespace WindowsFormsApp1
             matriz.setElementoPos(randX, randY, 4);
             matriz.colocarFinal(randX, randY);
             matriz.colocarObstaculos((m * n) / 6);
+
         }
 
        
@@ -883,5 +988,7 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        
     }
 }

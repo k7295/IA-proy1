@@ -21,6 +21,7 @@ namespace Proyecto_IA1.Mapa
         public int tamañoCuadro { get; set; }
         public int[][][] solucion { get; set; }
         public bool[][] visitados { get; set; }
+        public bool existeSolucion_atr { get; set; }
         public bool modoDiagonal;
 
         public Mapa(int m, int n, int a)
@@ -183,7 +184,7 @@ namespace Proyecto_IA1.Mapa
                                     {
                                         if (this.modoDiagonal)
                                         {
-                                            lista.Add(new Coordenada(x, y, tamañoCuadro * Math.Sqrt(2)));
+                                            lista.Add(new Coordenada(x, y, tamañoCuadro * Math.Sqrt(2) ));
                                         }
                                     }
                                 }
@@ -199,12 +200,12 @@ namespace Proyecto_IA1.Mapa
         {
             int i = 0;
             Coordenada primera = (Coordenada)vecinos[0];
-            double costeTotal = this.coste_Total[primera.x][primera.y] + this.distancias_M[primera.x][primera.y];
+            double costeTotal =this.calcularHeuristica(primera);
             int cont = 0;
 
             foreach (Coordenada c in vecinos)
             {
-                double costeActual = this.coste_Total[c.x][c.y] + this.distancias_M[c.x][c.y];
+                double costeActual = this.calcularHeuristica(c);
                 if (costeActual < costeTotal)
                 {
                     i = cont;
@@ -240,6 +241,7 @@ namespace Proyecto_IA1.Mapa
         public void a_estrella(bool diagonales)
         {
             this.modoDiagonal = diagonales;
+            this.existeSolucion_atr = true;
             ArrayList vecinos = new ArrayList();
             Coordenada c = new Coordenada(finalX, finalY, 0);
             vecinos.Add(c);
@@ -248,27 +250,29 @@ namespace Proyecto_IA1.Mapa
             a_estrella_aux(vecinos, false);
         }
 
-
+        public bool existeSolucion()
+        {
+            return this.existeSolucion_atr;
+        }
 
         private void a_estrella_aux(ArrayList vecinos, bool termino)
         {
-
             bool termino_actual = false;
+            if(vecinos.Count == 0)
+            {
+                this.existeSolucion_atr = false;
+                termino = true;
+            }
             if (!termino)
             {
+                
 
-                Coordenada c;
-
-                if (indiceFinal(vecinos) != -1)
+                Coordenada c = obtenerMenor(vecinos);
+                if(c.x == this.inicioX && c.y == this.inicioY)
                 {
-                    c = (Coordenada)vecinos[indiceFinal(vecinos)];
                     termino_actual = true;
                 }
-                else
-                {
-                    c = obtenerMenor(vecinos);
-                }
-
+                
                 visitados[c.x][c.y] = true;
 
                 ArrayList vecinos_nuevos = obtenerVecinos(c);
@@ -278,12 +282,15 @@ namespace Proyecto_IA1.Mapa
                     {
                         this.solucion[c_nuevo.x][c_nuevo.y][0] = c.x;
                         this.solucion[c_nuevo.x][c_nuevo.y][1] = c.y;
+                        this.coste_Total[c_nuevo.x][c_nuevo.y] = c_nuevo.distancia + this.coste_Total[c.x][c.y];
                         vecinos.Add(c_nuevo);
+
                     }
                     else
                     {
                         if (calcularHeuristica(c_nuevo, c) < calcularHeuristica(c_nuevo))
                         {
+                            
                             this.solucion[c_nuevo.x][c_nuevo.y][0] = c.x;
                             this.solucion[c_nuevo.x][c_nuevo.y][1] = c.y;
 
@@ -297,7 +304,7 @@ namespace Proyecto_IA1.Mapa
 
         private double calcularHeuristica(Coordenada c_actual, Coordenada c_anterior)
         {
-            return this.distancias_M[c_actual.x][c_actual.y] + this.coste_Total[c_anterior.x][c_anterior.y];
+            return this.distancias_M[c_actual.x][c_actual.y] + this.coste_Total[c_anterior.x][c_anterior.y] + c_actual.distancia;
         }
 
         private double calcularHeuristica(Coordenada c)
@@ -375,44 +382,6 @@ namespace Proyecto_IA1.Mapa
             }
             return false;
         }
-        
-
-        private ArrayList obtenerVecinos(int x, int y)
-        {
-            ArrayList listaNueva = new ArrayList();
-            int m = this.matriz.Length;
-            int n = this.matriz[0].Length;
-
-            for (int i = -1; i <= 1; i++)
-            {
-                for (int j = -1; j <= 1; j++)
-                {
-                    if (0 <= x + i && x + i < m)
-                    {
-                        if (0 <= y + j && y + j < n)
-                        {
-                            if (this.matriz[x + i][y + j] != 1)
-                            {
-                                double distancia;
-                                if(!(i == 0 && j == 0))
-                                {
-                                    if (i != 0 && j != 0)
-                                    {
-                                        distancia = Math.Sqrt(2) * this.tamañoCuadro;
-                                    }
-                                    else
-                                    {
-                                        distancia = this.tamañoCuadro;
-                                    }
-                                    listaNueva.Add(new Nodo(x, y, x + i, y + j, distancia));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return listaNueva;
-        }
 
         public void limpiarRuta()
         {
@@ -438,31 +407,40 @@ namespace Proyecto_IA1.Mapa
             modoDiagonal = false;
         }
 
-        public void crearRuta()
+        public bool crearRuta()
         {
             this.distancias_M = generarMatrizVaciaInt(m, n, 0);
             this.coste_Total = generarMatrizVaciaDouble(m, n, 0);
             this.solucion = generarMatrizSolucion(m, n, -1, -1);
             this.visitados = generarMatrizVisitados(m, n);
             a_estrella(modoDiagonal);
-            bool termino = false;
-            int[] actual = new int[2];
-            actual[0] = inicioX;
-            actual[1] = inicioY;
-            while (!termino)
+            if (existeSolucion())
             {
-                System.Console.WriteLine(actual[0] + " " + actual[1]);
-
-                matriz[actual[0]][actual[1]]=3;
-                if (actual[0] == finalX && actual[1] == finalY)
+                bool termino = false;
+                int[] actual = new int[2];
+                actual[0] = inicioX;
+                actual[1] = inicioY;
+                while (!termino)
                 {
-                    matriz[actual[0]][actual[1]] = 4;
-                    termino = true;
-                }
-                actual = next(actual);
+                    System.Console.WriteLine(actual[0] + " " + actual[1]);
 
+                    matriz[actual[0]][actual[1]] = 3;
+                    if (actual[0] == finalX && actual[1] == finalY)
+                    {
+                        matriz[actual[0]][actual[1]] = 4;
+                        termino = true;
+                    }
+                    actual = next(actual);
+
+                }
+                matriz[inicioX][inicioY] = 2;
+                return true;
             }
-            matriz[inicioX][inicioY] = 2;
+            else
+            {
+                return false;
+            }
+            
         }
         
 
