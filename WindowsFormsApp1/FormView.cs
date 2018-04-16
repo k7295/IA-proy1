@@ -37,25 +37,21 @@ namespace WindowsFormsApp1
             matriz = new Mapa(m, n, size);
             
 
-            //newGame();
-            startGame();
-            newGameFlag = false;
+            
             
             agent = new Thread(IniAgente);
-            /*
+            
             pBuild.ClearContent();
-            pBuild.AppendText("Welcome to the maze game,");
+            pBuild.AppendText("Hello, my name is Sebastian, Welcome to the maze game,");
             sSynth.Speak(pBuild);
-            pBuild.ClearContent();
-            pBuild.AppendText("Please follow all the instructions,");
-            sSynth.Speak(pBuild);
-            pBuild.ClearContent();
-            pBuild.AppendText("Use the command help to find all instructions available");
-            sSynth.Speak(pBuild);
-            pBuild.ClearContent();
-            pBuild.AppendText("Player is green square and destination is red square");
-            sSynth.Speak(pBuild);*/
 
+            pBuild.ClearContent();
+            pBuild.AppendText("Please follow all the instructions, Use the command help to find all the instructions available, Player is green square and destination is red square");
+            sSynth.Speak(pBuild);
+
+            newGame();
+            /*startGame();
+            newGameFlag = false;*/
             agent.Start();
 
         }
@@ -78,13 +74,13 @@ namespace WindowsFormsApp1
             if (mFlag)
             {
                 pBuild.ClearContent();
-                pBuild.AppendText("What is the value for row n, Can be between five to twenty. thirty,forty,or fifty");
+                pBuild.AppendText("What is the value for row m, Can be between five to twenty. thirty,forty,or fifty");
 
             }
             if (nFlag)
             {
                 pBuild.ClearContent();
-                pBuild.AppendText("What is the value for column m, Can be between five to twenty. thirty,forty,or fifty");
+                pBuild.AppendText("What is the value for column n, Can be between five to twenty. thirty,forty,or fifty");
             }
             if (!newGameFlag)
             {
@@ -125,12 +121,11 @@ namespace WindowsFormsApp1
             
         }
 
-        public void recEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs er)
+        public void commands(SpeechRecognizedEventArgs er)
         {
-            pBuild.ClearContent();
             switch (er.Result.Text)
             {
-       
+
                 case "north":
                     if (matriz.moverNorte())
                     {
@@ -143,7 +138,7 @@ namespace WindowsFormsApp1
                     System.Console.WriteLine("up");
                     break;
                 case "up":
-                    if(matriz.moverNorte())
+                    if (matriz.moverNorte())
                     {
                         pBuild.AppendText("moving up");
                     }
@@ -153,7 +148,7 @@ namespace WindowsFormsApp1
                     }
                     System.Console.WriteLine("up");
                     break;
-           
+
                 case "south":
                     if (matriz.moverSur())
                     {
@@ -176,7 +171,7 @@ namespace WindowsFormsApp1
                     }
                     System.Console.WriteLine("down");
                     break;
-                
+
                 case "west":
                     if (matriz.moverOeste())
                     {
@@ -210,7 +205,7 @@ namespace WindowsFormsApp1
                     }
                     System.Console.WriteLine("right");
                     break;
-                
+
                 case "right":
                     if (matriz.moverEste())
                     {
@@ -232,13 +227,17 @@ namespace WindowsFormsApp1
                     {
                         pBuild.AppendText("No route is available");
                     }
-                    
+
                     System.Console.WriteLine("show route");
                     break;
                 case "clean":
                     matriz.limpiarRuta();
                     pBuild.AppendText("route cleaned");
                     System.Console.WriteLine("clean route");
+                    break;
+                case "sebastian":
+                    pBuild.AppendText("yes?");
+                    System.Console.WriteLine("sebastian");
                     break;
                 case "enable diagonal":
                     matriz.enableDiagonal();
@@ -329,16 +328,42 @@ namespace WindowsFormsApp1
                 case "new game":
                     newGame();
                     newGameFlag = true;
-                    pBuild.AppendText("making new game");
+                    
                     break;
                 case "start game":
-                    if(nFlag == false && mFlag == false && newGameFlag == true)
+                    if (nFlag == false && mFlag == false && newGameFlag == true)
                     {
                         newGameFlag = false;
                         startGame();
                         pBuild.AppendText("Game starting");
                     }
                     break;
+                case "new end":
+                    randEnd();
+                    pBuild.AppendText("Destination changed");
+                    break;
+                case "new start":
+                    randStart();
+                    pBuild.AppendText("Start changed");
+                    break;
+                case "help":
+                    pBuild.AppendText("To move upwards, use up or north," +
+                        " to move downwards, use down or south, to move to " +
+                        "the left, use left or west, to move to the right, " +
+                        "use right or east, To show the route to the destination," +
+                        " use show route, to clean the route, use clean, to " +
+                        "enable diagonals, use enable diagonal, " +
+                        "to disable diagonals, use disable diagonal, to change the " +
+                        "size, use size, to change the destination, use new end," +
+                        " to change the start, use new start, for a new game, use new game,");
+                    break;
+            }
+        }
+
+        public void numSelect(SpeechRecognizedEventArgs er)
+        {
+            switch (er.Result.Text)
+            {
                 case "five":
                     if (sizeFlag)
                     {
@@ -364,7 +389,7 @@ namespace WindowsFormsApp1
                         pBuild.AppendText("n is set to five");
                         sSynth.Speak(pBuild);
                         pBuild.ClearContent();
-                        
+
                         startGame();
                         pBuild.AppendText("Game starting");
                     }
@@ -462,10 +487,10 @@ namespace WindowsFormsApp1
                         sizeFlag = false;
                         break;
                     }
-                    
+
                     if (mFlag)
                     {
-                        m =9;
+                        m = 9;
                         pBuild.AppendText("m is set to nine");
                         mFlag = false;
                         nFlag = true;
@@ -625,7 +650,7 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "fifth":
-                   
+
                     if (mFlag)
                     {
                         m = 15;
@@ -647,7 +672,7 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "sixteen":
-                    
+
                     if (mFlag)
                     {
                         m = 16;
@@ -669,7 +694,7 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "seventeen":
-                    
+
                     if (mFlag)
                     {
                         m = 17;
@@ -691,7 +716,7 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "eighteen":
-                    
+
                     if (mFlag)
                     {
                         m = 18;
@@ -713,7 +738,7 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "nineteen":
-                    
+
                     if (mFlag)
                     {
                         m = 19;
@@ -735,7 +760,7 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "twenty":
-                    
+
                     if (mFlag)
                     {
                         m = 20;
@@ -757,7 +782,7 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "thirty":
-                    
+
                     if (mFlag)
                     {
                         m = 30;
@@ -800,7 +825,7 @@ namespace WindowsFormsApp1
                         startGame();
                         pBuild.AppendText("Game starting");
                     }
-                    
+
                     break;
                 case "fifty":
                     if (mFlag)
@@ -813,7 +838,7 @@ namespace WindowsFormsApp1
                     }
                     if (nFlag)
                     {
-                        
+
                         n = 50;
                         pBuild.AppendText("n is set to fifty");
                         sSynth.Speak(pBuild);
@@ -824,37 +849,23 @@ namespace WindowsFormsApp1
                         pBuild.AppendText("Game starting");
                     }
                     break;
-                case "fuck you":
-                    pBuild.AppendText("No, fuck you");
-                    break;
-                case "you suck":
-                    pBuild.AppendText("No, you suck, this code is full of bugs");
-                    break;
-                case "new end":
-                    randEnd();
-                    pBuild.AppendText("Destination changed");
-                    break;
-                case "new start":
-                    randStart();
-                    pBuild.AppendText("Start changed");
-                    break;
-                case "help":
-                    pBuild.AppendText("To move upwards, use up or north," +
-                        " to move downwards, use down or south, to move to " +
-                        "the left, use left or west, to move to the right, " +
-                        "use right or east, To show the route to the destination," +
-                        " use show route, to clean the route, use clean, to " +
-                        "enable diagonals, use enable diagonal, " +
-                        "to disable diagonals, use disable diagonal, to change the " +
-                        "size, use size, to change the destination, use new end," +
-                        " to change the start, use new start, for a new game, use new game,");
-                    break;
+            }
+        }
+
+        public void recEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs er)
+        {
+            pBuild.ClearContent();
+            if (!sizeFlag && !mFlag && !nFlag)  
+            {
+                commands(er);
+            }
+            else
+            {
+                numSelect(er);
             }
             
             sSynth.Speak(pBuild);
-            matriz.imprimirArreglo();
-            pBuild.ClearContent();
-            pBuild.AppendText("What to do now?");
+            
             
         }
         public void randEnd()
@@ -881,6 +892,10 @@ namespace WindowsFormsApp1
 
         public void newGame()
         {
+            pBuild.ClearContent();
+            pBuild.AppendText("making new game");
+            sSynth.Speak(pBuild);
+
             Choices commands = new Choices();
             commands.Add(new string[] { "start game",
                                         "five","six","seven","eight","nine","ten",
@@ -919,7 +934,7 @@ namespace WindowsFormsApp1
                                         "five","six","seven","eight","nine","ten",
                                         "eleven","twelve","thirteen","fourteen","fifteen",
                                         "sixteen","seventeen","eighteen","nineteen","twenty","thirty","forty","fifty",
-                                        "fuck you","you suck","new end","new start","help"
+                                        "fuck you","you suck","new end","new start","help","sebastian"
             });
             gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
@@ -955,9 +970,6 @@ namespace WindowsFormsApp1
 
         private void FormView_Paint(object sender, PaintEventArgs e)
         {
-            //e.Graphics.FillRectangle(Brushes.White, new Rectangle(0, 0, 900, 900));
-
-            //e.Graphics.FillRectangle(Brushes.LightGreen, x, y, size, size);
             for (int i = 0; i < m; i++)
             {
                 for (int b = 0; b < n; b++)
